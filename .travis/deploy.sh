@@ -7,5 +7,7 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 fi
 
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
-  yarn semantic-release
+  yarn lerna-semantic-release pre
+  yarn lerna-semantic-release post
+  yarn lerna-semantic-release perform
 fi
