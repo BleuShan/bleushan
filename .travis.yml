@@ -1,6 +1,7 @@
 sudo: false
 language: node_js
 cache:
+  yarn: true
   directories:
     - node_modules
 notifications:
@@ -8,7 +9,10 @@ notifications:
 node_js:
   - "9"
 before_install: .travis/before_install.sh
-after_success: .travis/after_success.sh
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: .travis/deploy.sh
 script: yarn bootstrap && yarn build && yarn test:ci
 git:
   depth: 1

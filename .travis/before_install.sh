@@ -19,8 +19,8 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   git config credential.helper store
   echo "https://${RELEASE_GH_USERNAME}:${RELEASE_GH_TOKEN}@github.com/BleuShan/bleushan.git" > ~/.git-credentials
 
-  npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
-  npm prune
+  curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.6.0
+  export PATH=$HOME/.yarn/bin:$PATH
 
   git config --global user.email "lafontaine.philippe@gmail.com"
   git config --global user.name "Philippe Lafontaine"
