@@ -7,5 +7,5 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 fi
 
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
-  yarn semantic-release
+  npm run semantic-release
 fi
