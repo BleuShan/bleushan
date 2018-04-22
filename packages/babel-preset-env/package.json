@@ -42,5 +42,8 @@
       "/node_modules/",
       "/__fixtures__/"
     ]
+  },
+  "release": {
+    "branch": "master"
   }
 }

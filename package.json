@@ -17,6 +17,7 @@
     "build:dev": "lerna run build",
     "build": "NODE_ENV=production lerna run build",
     "lint": "lerna run lint",
+    "semantic-release": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",
     "test": "jest",
     "test:ci": "jest && codecov"
   },
@@ -41,5 +42,8 @@
       "/node_modules/",
       "/__fixtures__/"
     ]
+  },
+  "release": {
+    "branch": "master"
   }
 }
