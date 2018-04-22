@@ -19,6 +19,8 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   git config credential.helper store
   echo "https://${RELEASE_GH_USERNAME}:${RELEASE_GH_TOKEN}@github.com/BleuShan/bleushan.git" > ~/.git-credentials
 
+  npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
+
   git config --global user.email "lafontaine.philippe@gmail.com"
   git config --global user.name "Philippe Lafontaine"
   git config --global push.default simple
