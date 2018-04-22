@@ -1,0 +1,41 @@
+{
+  "name": "bleushan",
+  "version": "0.0.0",
+  "description": "A monorepo of utils",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BleuShan/bleushan.git"
+  },
+  "author": "Philippe Lafontaine <lafontaine.philippe@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build:dev": "lerna run build",
+    "build": "NODE_ENV=production lerna run build",
+    "lint": "lerna run lint",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "cz-lerna-changelog": "^1.2.1",
+    "lerna": "^2.10.0",
+    "lerna-semantic-release": "^9.1.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "jest": {
+    "projects": [
+      "<rootDir>/packages/*"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/__fixtures__/"
+    ]
+  }
+}

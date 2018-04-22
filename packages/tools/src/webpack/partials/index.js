@@ -1,0 +1,6 @@
+export {default as configure} from './configure'
+export {default as entry} from './entry'
+export {default as loader} from './loader'
+export {default as output} from './output'
+export {default as plugin} from './plugin'
+export * as presets from './presets'
