@@ -8,6 +8,6 @@ notifications:
 node_js:
   - "9"
 after_success: .travis/after_success.sh
-script: yarn build && yarn test
+script: yarn bootstrap && yarn build && yarn test
 git:
   depth: 1
