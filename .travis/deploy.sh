@@ -7,8 +7,6 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 fi
 
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
-  git status
-  git checkout -- .
-  yarn lerna version --conventional-commits
-  yarn lerna publish
+  yarn lerna version --conventional-commits --yes
+  yarn lerna publish --yes
 fi
