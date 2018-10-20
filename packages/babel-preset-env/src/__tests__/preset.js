@@ -1,33 +1,42 @@
 import preset from '../'
-import {buildDefaultImportPluginSet} from '../__fixtures__/setupImportPlugin'
+import { buildDefaultImportPluginSet } from '../__fixtures__/setupImportPlugin'
 jest.mock('@babel/helper-plugin-utils')
 describe('preset', () => {
-  const expectedResult = (env, {import: _import, minify, ...presetOptions}) => {
-    const {modules, targets} = presetOptions
+  const expectedResult = (
+    env,
+    { import: _import, minify, ...presetOptions }
+  ) => {
+    const { modules, targets } = presetOptions
     const esModuleTarget = targets ? !!targets.esModules : false
     const esModules = modules === false || esModuleTarget
     const importPlugins = buildDefaultImportPluginSet(esModules)
-    const testEnvPlugins = env === 'test'
-      ? [
-        'dynamic-import-node',
-        '@babel/transform-modules-commonjs'
-      ] : []
+    const testEnvPlugins =
+      env === 'test'
+        ? [
+          'babel-plugin-dynamic-import-node',
+          '@babel/plugin-transform-modules-commonjs'
+        ]
+        : []
     const plugins = [
+      '@babel/plugin-proposal-export-default-from',
       '@babel/plugin-proposal-export-namespace-from',
       ...testEnvPlugins,
       ...importPlugins
     ]
 
-    const minifyPreset = env === 'test' || minify === false ? [] : [
-      [
-        'minify',
-        {
-          keepFnName: true,
-          keepClassName: true,
-          ...(minify != null ? minify : {})
-        }
-      ]
-    ]
+    const minifyPreset =
+      env === 'test' || minify === false
+        ? []
+        : [
+          [
+            'minify',
+            {
+              keepFnName: true,
+              keepClassName: true,
+              ...(minify != null ? minify : {})
+            }
+          ]
+        ]
 
     const presets = [
       ...minifyPreset,
@@ -108,7 +117,7 @@ describe('preset', () => {
             }
             it('should desactivate minifcation', () => {
               const result = preset(env, options)
-              expect(result).toEqual(expectedResult(env, {minify: false}))
+              expect(result).toEqual(expectedResult(env, { minify: false }))
             })
           })
 
@@ -125,7 +134,7 @@ describe('preset', () => {
             }
             it('should desactivate minifcation', () => {
               const result = preset(env, options)
-              expect(result).toEqual(expectedResult(env, {minify: {}}))
+              expect(result).toEqual(expectedResult(env, { minify: {} }))
             })
           })
         })
@@ -144,7 +153,9 @@ describe('preset', () => {
             }
             it('should use the matching setting', () => {
               const result = preset(env, options)
-              expect(result).toEqual(expectedResult(env, {minify: {keepClassName: false}}))
+              expect(result).toEqual(
+                expectedResult(env, { minify: { keepClassName: false } })
+              )
             })
           })
 
@@ -158,7 +169,7 @@ describe('preset', () => {
             }
             it('should use the matching setting', () => {
               const result = preset(env, options)
-              expect(result).toEqual(expectedResult(env, {minify: false}))
+              expect(result).toEqual(expectedResult(env, { minify: false }))
             })
           })
         })

@@ -14,13 +14,14 @@
   "scripts": {
     "build": "yarn clean && yarn compile",
     "clean": "rimraf lib",
-    "compile": "babel src -d lib --ignore \"**/__@(tests|mocks|fixtures)__\"",
+    "compile": "babel src -d lib --ignore '**/__tests__,**/__mocks__,**/__fixtures__'",
     "lint": "eslint --fix src",
     "test": "jest"
   },
   "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/helper-plugin-utils": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
@@ -41,7 +42,10 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/__fixtures__/"
-    ]
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "../../scripts/jest/root-babel-jest.js"
+    }
   },
   "release": {
     "branch": "master"

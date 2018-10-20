@@ -45,5 +45,8 @@
   },
   "release": {
     "branch": "master"
+  },
+  "babel": {
+    "configFile": false
   }
 }
