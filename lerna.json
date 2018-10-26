@@ -5,6 +5,9 @@
   "command": {
     "add": {
       "ignore": "@bleushan/eslint-config"
+    },
+    "publish": {
+      "message": "chore(release): publish %s [skip ci]"
     }
   },
   "packages": ["packages/*"]

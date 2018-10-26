@@ -7,6 +7,5 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 fi
 
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
-  yarn lerna version --conventional-commits --yes
-  yarn lerna publish --yes
+  yarn lerna publish --conventional-commits --yes
 fi
