@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@1.0.2...@bleushan/babel-preset-env@1.1.0) (2018-10-28)
+
+
+### Features
+
+* **babel-preset:** add dynamic import by default ([9fca34b](https://github.com/BleuShan/bleushan/commit/9fca34b))
+
+
+
+
+
 ## [1.0.2](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@1.0.1...@bleushan/babel-preset-env@1.0.2) (2018-10-26)
 
 
