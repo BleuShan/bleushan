@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/BleuShan/bleushan/compare/@bleushan/eslint-config@1.1.0...@bleushan/eslint-config@1.2.0) (2018-11-04)
+
+
+### Features
+
+* **eslint-config:** allow if statements in tests ([f364887](https://github.com/BleuShan/bleushan/commit/f364887))
+
+
+
+
+
 # [1.1.0](https://github.com/BleuShan/bleushan/compare/@bleushan/eslint-config@1.0.2...@bleushan/eslint-config@1.1.0) (2018-11-04)
 
 
