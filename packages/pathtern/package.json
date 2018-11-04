@@ -1,6 +1,6 @@
 {
   "name": "@bleushan/pathtern",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Routing utilities",
   "keywords": [
     "Router"
@@ -33,7 +33,6 @@
     "jest": "^23.6.0",
     "rimraf": "^2.6.2"
   },
-  "dependencies": {},
   "jest": {
     "coveragePathIgnorePatterns": [
       "/node_modules/",
