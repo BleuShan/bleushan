@@ -1,0 +1,15 @@
+coverage
+test
+__tests__
+__mocks__
+__fixtures__
+lib/types.js
+node_modules
+scripts
+.eslintignore
+.travis.yml
+codecov.yml
+yarn.lock
+.nyc_output
+.vscode
+.eslintrc

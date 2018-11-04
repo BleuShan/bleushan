@@ -1,0 +1,49 @@
+{
+  "name": "@bleushan/pathtern",
+  "version": "0.0.0",
+  "description": "Routing utilities",
+  "keywords": [
+    "Router"
+  ],
+  "author": "Philippe Lafontaine <lafontaine.philippe@gmail.com>",
+  "homepage": "https://github.com/BleuShan/bleushan#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "src/index.js",
+  "jsnext:main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BleuShan/bleushan.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf lib",
+    "compile": "babel src -d lib --ignore '**/__tests__,**/__mocks__,**/__fixtures__'",
+    "lint": "eslint --fix src",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@bleushan/babel-preset-env": "^1.1.2",
+    "@bleushan/eslint-config": "^1.2.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {},
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/__fixtures__/"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "../../scripts/jest/root-babel-jest.js"
+    }
+  },
+  "release": {
+    "branch": "master"
+  }
+}
