@@ -30,6 +30,8 @@ module.exports = {
       rules: {
         'fp/no-unused-expression': 'off',
         'fp/no-nil': 'off',
+        'fp/no-this': 'off',
+        'fp/no-class': 'off',
         'better/explicit-return': 'off',
         'better/no-ifs': 'off'
       }
