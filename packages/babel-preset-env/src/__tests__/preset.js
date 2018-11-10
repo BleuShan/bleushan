@@ -1,6 +1,8 @@
 import preset from '../'
 import { buildDefaultImportPluginSet } from '../__fixtures__/setupImportPlugin'
+
 jest.mock('@babel/helper-plugin-utils')
+
 describe('preset', () => {
   const expectedResult = (
     env,
@@ -13,9 +15,9 @@ describe('preset', () => {
     const testEnvPlugins =
       env === 'test'
         ? [
-          'babel-plugin-dynamic-import-node',
-          '@babel/plugin-transform-modules-commonjs'
-        ]
+            'babel-plugin-dynamic-import-node',
+            '@babel/plugin-transform-modules-commonjs'
+          ]
         : []
     const plugins = [
       '@babel/plugin-syntax-dynamic-import',
@@ -29,15 +31,15 @@ describe('preset', () => {
       env === 'test' || minify === false
         ? []
         : [
-          [
-            'minify',
-            {
-              keepFnName: true,
-              keepClassName: true,
-              ...(minify != null ? minify : {})
-            }
+            [
+              'minify',
+              {
+                keepFnName: true,
+                keepClassName: true,
+                ...(minify != null ? minify : {})
+              }
+            ]
           ]
-        ]
 
     const presets = [
       ...minifyPreset,

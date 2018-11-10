@@ -26,5 +26,8 @@ module.exports = wallaby => ({
   env: {
     type: 'node',
     runner: 'node'
+  },
+  hints: {
+    ignoreCoverage: /istanbul ignore next/
   }
 })
