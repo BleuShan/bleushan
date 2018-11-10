@@ -33,7 +33,8 @@ module.exports = {
         'fp/no-this': 'off',
         'fp/no-class': 'off',
         'better/explicit-return': 'off',
-        'better/no-ifs': 'off'
+        'better/no-ifs': 'off',
+        'better/no-new': 'off'
       }
     }
   ]
