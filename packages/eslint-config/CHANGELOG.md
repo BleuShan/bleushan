@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/BleuShan/bleushan/compare/@bleushan/eslint-config@1.2.0...@bleushan/eslint-config@1.2.1) (2018-11-10)
+
+
+### Bug Fixes
+
+* **eslint-config:** allow class usage in test files ([89faa43](https://github.com/BleuShan/bleushan/commit/89faa43))
+
+
+
+
+
 # [1.2.0](https://github.com/BleuShan/bleushan/compare/@bleushan/eslint-config@1.1.0...@bleushan/eslint-config@1.2.0) (2018-11-04)
 
 
