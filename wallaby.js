@@ -23,6 +23,10 @@ module.exports = wallaby => ({
     '**/*.js': wallaby.compilers.babel()
   },
   testFramework: 'jest',
+  setup({ testFramework }) {
+    const jestConfig = require('./package.json').jest
+    testFramework.configure(jestConfig)
+  },
   env: {
     type: 'node',
     runner: 'node'

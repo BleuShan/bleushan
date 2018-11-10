@@ -8,7 +8,7 @@ describe('preset', () => {
     env,
     { import: _import, minify, ...presetOptions }
   ) => {
-    const { modules, targets } = presetOptions
+    const { modules, targets, decorators } = presetOptions
     const esModuleTarget = targets ? !!targets.esModules : false
     const esModules = modules === false || esModuleTarget
     const importPlugins = buildDefaultImportPluginSet(esModules)
@@ -19,12 +19,32 @@ describe('preset', () => {
             '@babel/plugin-transform-modules-commonjs'
           ]
         : []
+    const decoratorsPlugins =
+      decorators === 'legacy'
+        ? [
+            [
+              '@babel/plugin-proposal-decorators',
+              { legacy: true, decoratorsBeforeExport: true }
+            ],
+            ['@babel/plugin-proposal-class-properties', { loose: true }]
+          ]
+        : decorators === false
+        ? ['@babel/plugin-proposal-class-properties']
+        : [
+            [
+              '@babel/plugin-proposal-decorators',
+              { decoratorsBeforeExport: true }
+            ],
+            '@babel/plugin-proposal-class-properties'
+          ]
     const plugins = [
+      ...decoratorsPlugins,
+      '@babel/plugin-proposal-optional-chaining',
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-proposal-export-default-from',
       '@babel/plugin-proposal-export-namespace-from',
-      ...testEnvPlugins,
-      ...importPlugins
+      ...importPlugins,
+      ...testEnvPlugins
     ]
 
     const minifyPreset =
@@ -78,6 +98,18 @@ describe('preset', () => {
       }
       it('should build the right plugin set', () => {
         expect(preset(env, options)).toEqual(expectedResult(env, options))
+      })
+    })
+
+    describe.each`
+      decorators
+      ${false}
+      ${'legacy'}
+    `('with decorators set to $options', ({ decorators }) => {
+      it('should build the right plugin set', () => {
+        expect(preset(env, { decorators })).toEqual(
+          expectedResult(env, { decorators })
+        )
       })
     })
 

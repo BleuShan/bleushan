@@ -9,12 +9,43 @@ and some commonjs module transforms as required by [`jest`][4]
 test environment.
 
 Out of the box it works [`@babel/preset-env`][1] with `spec`, `shippedProposals`
-turned on and `useBuiltIns` set to `usage`.
+turned on and `useBuiltIns` set to `usage`. We also added
+`@babel/plugin-proposal-optional-chaining`,
+`@babel/plugin-proposal-class-properties` and `@babel/plugin-proposal-decorators`
 
 ### Usage
 
 Configuration works as expected by [`@babel/preset-env`][1].
 To accommodate the additions to the preset we added the following:
+
+### Decorator support
+
+Defaults to:
+
+```json
+{
+  "preset": [
+    "@bleushan/babel-preset-env"
+    {
+      "decorators": true,
+      "decoratorsBeforeExport": true
+    }
+  ]
+}
+```
+
+to turn on legacy behavior:
+
+```json
+{
+  "preset": [
+    "@bleushan/babel-preset-env"
+    {
+      "decorators": "legacy"
+    }
+  ]
+}
+```
 
 #### babel-preset-minify
 
@@ -25,7 +56,7 @@ To accommodate the additions to the preset we added the following:
   "preset": [
     "@bleushan/babel-preset-env"
     {
-      "minify": {      
+      "minify": {
         "keepFnName": true,
         "keepClassName": true
       }
@@ -33,7 +64,9 @@ To accommodate the additions to the preset we added the following:
   ]
 }
 ```
+
 to turn it off:
+
 ```json
 {
   "preset": [
@@ -44,7 +77,9 @@ to turn it off:
   ]
 }
 ```
+
 It also accepts some per environment configuration like so:
+
 ```json
 {
   "preset": [
@@ -52,7 +87,7 @@ It also accepts some per environment configuration like so:
     {
       "minify": {
         "env": {
-          "production": {      
+          "production": {
             "keepFnName": true,
             "keepClassName": true
           }
@@ -62,7 +97,9 @@ It also accepts some per environment configuration like so:
   ]
 }
 ```
+
 This also turn off minification for all other environments. To turn it back on with our defaults:
+
 ```json
 {
   "preset": [
@@ -71,7 +108,7 @@ This also turn off minification for all other environments. To turn it back on w
       "minify": {
         "useDefaults": true,
         "env": {
-          "production": {      
+          "production": {
             "keepFnName": false,
             "keepClassName": false
           }
@@ -81,7 +118,9 @@ This also turn off minification for all other environments. To turn it back on w
   ]
 }
 ```
+
 Or if you'd like use some baseline config:
+
 ```json
 {
   "preset": [
@@ -91,7 +130,7 @@ Or if you'd like use some baseline config:
         "keepFnName": false,
         "keepClassName": false,
         "env": {
-          "development": {      
+          "development": {
             "keepFnName": true,
             "keepClassName": true
           }
@@ -101,10 +140,12 @@ Or if you'd like use some baseline config:
   ]
 }
 ```
+
 For more information about configuration options see the [preset doc][3.1]
 
 ##### Caveats
-* Minification is turned off on `test` environment because it messed up [`jest`][4] mocking.
+
+- Minification is turned off on `test` environment because it messed up [`jest`][4] mocking.
 
 #### ant-design/babel-plugin-import
 
@@ -125,7 +166,9 @@ entry:
   ]
 }
 ```
+
 to add a bunch of entries:
+
 ```json
 {
   "preset": [
@@ -147,6 +190,7 @@ to add a bunch of entries:
   ]
 }
 ```
+
 Please refer to [`ant-design/babel-plugin-import`][2] for how to configure entries.
 
 [1]: https://github.com/babel/babel/tree/master/packages/babel-preset-env
