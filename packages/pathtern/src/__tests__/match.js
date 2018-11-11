@@ -1,51 +1,50 @@
 import match from '../match.js'
-import prettyFormat from 'pretty-format'
 
 describe('calling match', () => {
   describe('using a switchPath style route config', () => {
     describe('with a default case', () => {
       const usersRoute = jest.fn(() => usersRoute).mockName('usersRoute')
       const postsRoute = jest.fn(() => postsRoute).mockName('postsRoute')
+      const typedRoute = jest.fn(() => typedRoute).mockName('typedRoute')
       const routes = {
         '/': 1,
         '/home': 456,
         '/users/:id': usersRoute,
         '/posts/{id}/:slug': postsRoute,
+        '/typed/{id:number}/{name:string}': typedRoute,
         '*': 'Not Found'
       }
 
-      describe.each`
-        path                | expectedResult                                   | args
-        ${'/'}              | ${{ path: '/', value: 1 }}                       | ${null}
-        ${'/users/25'}      | ${{ path: '/users/25', value: usersRoute }}      | ${{ id: 25 }}
-        ${'/posts/25/test'} | ${{ path: '/posts/25/test', value: postsRoute }} | ${{ id: 25, slug: 'test' }}
-        ${'/hi'}            | ${{ path: '/hi', value: 'Not Found' }}           | ${null}
-        ${'/home/foo'}      | ${{ path: '/home', value: 456 }}                 | ${null}
-      `('when called with the $path', ({ path, expectedResult, args }) => {
-        const result = match(path, routes)
-        it(`should return with ${prettyFormat(expectedResult, {
-          plugins: [
-            {
-              test(value) {
-                return jest.isMockFunction(value)
-              },
-              print(value) {
-                return (
-                  value.getMockName() || value.displayName || value.name
-                )
-              }
-            }
-          ]
-        })}`, () => {
-          expect(result).toEqual(expectedResult)
-        })
-
-        if (jest.isMockFunction(expectedResult.value)) {
-          it('should have called routed function', () => {
-            expect(expectedResult.value).toBeCalledWith(args)
-          })
-        }
+      beforeEach(() => {
+        jest.clearAllMocks()
       })
+
+      it.each`
+        path           | expected
+        ${'/'}         | ${{ path: '/', value: 1 }}
+        ${'/hi'}       | ${{ path: '/hi', value: 'Not Found' }}
+        ${'/home/foo'} | ${{ path: '/home', value: 456 }}
+      `(
+        'when called with the $path should return with $expected',
+        ({ path, expected }) => {
+          expect(match(path, routes)).toEqual(expected)
+        }
+      )
+
+      it.each`
+        inputPath                | expected                                                            | args
+        ${'/users/25'}           | ${{ path: '/users/25', value: usersRoute.getMockName() }}           | ${{ id: 25 }}
+        ${'/users/'}             | ${{ path: '/users/', value: usersRoute.getMockName() }}             | ${{}}
+        ${'/posts/25/test-slug'} | ${{ path: '/posts/25/test-slug', value: postsRoute.getMockName() }} | ${{ id: 25, slug: 'test-slug' }}
+        ${'/typed/25/1'}         | ${{ path: '/typed/25/1', value: typedRoute.getMockName() }}         | ${{ id: 25, name: '1' }}
+      `(
+        'when called with the $inputPath should return with $expected and call the value with $args',
+        ({ inputPath, expected, args }) => {
+          const { path, value } = match(inputPath, routes)
+          expect({ path, value: value.getMockName() }).toEqual(expected)
+          expect(value).toHaveBeenCalledWith(args)
+        }
+      )
     })
   })
 })

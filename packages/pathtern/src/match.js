@@ -1,57 +1,97 @@
-const PATH_MATCH_REGEX = /\/(\w+|{\w+}|:\w+)*/g
-const PATH_ARG_REGEX = /({\w+}|:\w+)/g
-const PARAMS_KEY_SANITIZE_REGEX = /[/{}:]/g
+import invariant from './utils/invariant.js'
+import isPlainObject from './utils/isPlainObject.js'
+import getTag from './utils/getTag.js'
+import getType from './utils/getType.js'
+import splitPath from './splitPath.js'
+import { PARAM_KEY_REGEXP } from './constants.js'
 
-function choosePath(routedPath, path) {
-  return PATH_MATCH_REGEX.test(routedPath) &&
-    !PATH_ARG_REGEX.test(routedPath) &&
-    routedPath.length <= path.length
-    ? routedPath
-    : path
-}
+const getIncompatibleRouteConfigMessage = value =>
+  `Provided route config is incompatible. Expected ${getTag({})} ${getTag(
+    value
+  )}`
 
-function deserializeParamValue(value) {
+function deserializeParamValue(value, deserializerKey) {
   const number = Number.parseFloat(value)
-  return Number.isNaN(number) ? value : number
+  return Number.isNaN(number) || getType(value) === deserializerKey
+    ? value
+    : number
 }
 
-function extractParams(routedPath, path) {
-  const pathComponents = path.split('/')
-  return routedPath.split('/').reduce((result, routedPathComponent, index) => {
-    const value = pathComponents[index]
-    const key = routedPathComponent.replace(PARAMS_KEY_SANITIZE_REGEX, '')
-    return key === value
-      ? result
-      : {
-          ...result,
-          [key]: deserializeParamValue(value)
-        }
-  }, {})
+function extractParamKey(pathComponent) {
+  return (
+    pathComponent
+      ?.match(PARAM_KEY_REGEXP)
+      ?.filter(v => v && v !== pathComponent) || []
+  )
 }
 
-function getValue(routedPath, path, routedValue) {
-  return typeof routedValue === 'function'
-    ? routedValue(extractParams(routedPath, path))
-    : routedValue
+function getPartialMatchResult(path, candidatePath, candidateValue) {
+  const pathComponents = splitPath(path)
+  const candidatePathComponents = splitPath(candidatePath)
+  return pathComponents?.length <= candidatePathComponents?.length
+    ? pathComponents?.reduce(
+        ([currentPath, candidateValue, args, count], pathComponent, index) => {
+          const candidatePathComponent = candidatePathComponents[index]
+          const [paramKey, deserializerKey] = extractParamKey(
+            candidatePathComponent
+          )
+          const nextCount =
+            candidatePathComponent === pathComponent ||
+            (count > 1 && paramKey != null)
+              ? count + 1
+              : count
+
+          const nextArgs =
+            paramKey != null
+              ? {
+                  ...args,
+                  [paramKey]: deserializeParamValue(
+                    pathComponent,
+                    deserializerKey
+                  )
+                }
+              : args
+
+          return [
+            nextCount >= 2 ? path : currentPath,
+            candidateValue,
+            nextArgs,
+            nextCount
+          ]
+        },
+        ['', candidateValue, {}, 0]
+      )
+    : [
+        path.startsWith(candidatePath) && candidatePath !== '/'
+          ? candidatePath
+          : '',
+        candidateValue
+      ]
+}
+
+function getResult(path, candidateRoute) {
+  const [candidatePath, candidateValue] = candidateRoute
+  const isExactMatch = candidatePath === path || candidatePath === '*'
+  return isExactMatch
+    ? [path, candidateValue]
+    : getPartialMatchResult(path, candidatePath, candidateValue)
 }
 
 export default function match(path, routes) {
+  const isRoutesObject = isPlainObject(routes)
+  // eslint-disable-next-line fp/no-unused-expression
+  invariant(!isRoutesObject, getIncompatibleRouteConfigMessage(routes), 'match')
   const entries = Object.entries(routes)
-  const pathComponents = path.match(PATH_MATCH_REGEX)
-  const [routedPath, routedValue] = entries.find(([routePath]) => {
-    const routePathComponents = routePath.match(PATH_MATCH_REGEX)
-    return (
-      routePath === path ||
-      routePathComponents == null ||
-      (routePathComponents.length <= pathComponents.length &&
-        pathComponents.some(
-          (value, index) => value && value === routePathComponents[index]
-        ))
-    )
-  })
+  const [routedPath, routedValue, args] = entries.reduce(
+    (currentResult, candidateRoute) => {
+      const [reduced] = currentResult
+      return reduced ? currentResult : getResult(path, candidateRoute)
+    },
+    ['']
+  )
 
   return {
-    path: choosePath(routedPath, path),
-    value: getValue(routedPath, path, routedValue)
+    path: routedPath,
+    value: getType(routedValue) === 'function' ? routedValue(args) : routedValue
   }
 }
