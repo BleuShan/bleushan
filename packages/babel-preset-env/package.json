@@ -1,6 +1,6 @@
 {
   "name": "@bleushan/babel-preset-env",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A slightly more complicated babel preset env",
   "main": "lib/index.js",
   "module": "src/index.js",

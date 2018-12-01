@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://github.com/BleuShan/bleushan/compare/@bleushan/pathtern@0.1.6...@bleushan/pathtern@0.1.7) (2018-12-01)
+
+**Note:** Version bump only for package @bleushan/pathtern
+
+
+
+
+
 ## [0.1.6](https://github.com/BleuShan/bleushan/compare/@bleushan/pathtern@0.1.5...@bleushan/pathtern@0.1.6) (2018-12-01)
 
 **Note:** Version bump only for package @bleushan/pathtern
