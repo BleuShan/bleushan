@@ -22,10 +22,7 @@ describe('preset', () => {
     const decoratorsPlugins =
       decorators === 'legacy'
         ? [
-            [
-              '@babel/plugin-proposal-decorators',
-              { legacy: true, decoratorsBeforeExport: true }
-            ],
+            ['@babel/plugin-proposal-decorators', { legacy: true }],
             ['@babel/plugin-proposal-class-properties', { loose: true }]
           ]
         : decorators === false

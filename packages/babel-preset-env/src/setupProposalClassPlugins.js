@@ -1,9 +1,7 @@
 const DEFAULT_RESULT = ['@babel/plugin-proposal-class-properties']
 const configureDecoratorsPlugin = (mode, decoratorsBeforeExport) => [
   '@babel/plugin-proposal-decorators',
-  mode === 'legacy'
-    ? { decoratorsBeforeExport, legacy: true }
-    : { decoratorsBeforeExport }
+  mode === 'legacy' ? { legacy: true } : { decoratorsBeforeExport }
 ]
 
 const setupProposalClassPlugins = ({
