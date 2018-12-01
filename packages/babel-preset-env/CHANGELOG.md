@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@1.2.2...@bleushan/babel-preset-env@1.2.3) (2018-12-01)
+
+
+### Bug Fixes
+
+* **babel-preset-env:** prevent legacy decorators setting from generating invalid config ([b1b985a](https://github.com/BleuShan/bleushan/commit/b1b985a))
+
+
+
+
+
 ## [1.2.2](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@1.2.1...@bleushan/babel-preset-env@1.2.2) (2018-11-10)
 
 **Note:** Version bump only for package @bleushan/babel-preset-env
