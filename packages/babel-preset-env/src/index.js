@@ -13,8 +13,14 @@ const MINIFY_DEFAULTS = {
 }
 
 export default declare((api, options) => {
-  const { import: importOptions, minify, ...presetOptions } = options
-  const { modules, targets, decorators, decoratorsBeforeExport } = presetOptions
+  const {
+    import: importOptions,
+    minify,
+    decorators,
+    decoratorsBeforeExport,
+    ...presetOptions
+  } = options
+  const { modules, targets } = presetOptions
   const esModuleTarget = targets ? !!targets.esModules : false
   const esModules = modules === false || esModuleTarget
   const importPlugins = setupImportPlugin(importOptions, esModules)
