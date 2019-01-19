@@ -1,48 +1,55 @@
-const defaultOptions = esModules => [
-  {
-    libraryName: 'recompose',
-    libraryDirectory: '',
-    camel2DashComponentName: false
+import { isPlainObject } from './utils'
+
+/* eslint-disable no-template-curly-in-string */
+const defaultOptions = esModules => ({
+  lodash: {
+    transform: 'lodash/${member}',
+    preventFullImport: true
   },
-  {
-    libraryName: 'lodash',
-    libraryDirectory: '',
-    camel2DashComponentName: false
+  'lodash/fp': {
+    transform: 'lodash/fp/${member}',
+    preventFullImport: true
   },
-  {
-    libraryName: 'lodash/fp',
-    libraryDirectory: '',
-    camel2DashComponentName: false
-  },
-  {
-    libraryName: 'ramda',
-    libraryDirectory: esModules ? 'es' : 'src',
-    camel2DashComponentName: false
+  ramda: {
+    transform: esModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
+    preventFullImport: true
   }
+})
+
+const merge = (a, b) => {
+  const aEntries = Array.from(Object.entries(a))
+  const bEntries = isPlainObject(b) ? Array.from(Object.entries(b)) : []
+  const missingEntries = bEntries.filter(
+    ([key, value]) =>
+      aEntries.find(([aKey]) => aKey === key) == null && isPlainObject(value)
+  )
+  const commonEntries = bEntries.filter(
+    ([key, value]) =>
+      aEntries.find(([aKey]) => aKey === key) != null && isPlainObject(value)
+  )
+
+  return aEntries.concat(missingEntries).reduce((result, [key, value]) => {
+    const foundEntry = commonEntries.find(([itemKey]) => itemKey === key)
+    const foundValue = foundEntry ? foundEntry[1] : foundEntry
+    const mergedValue =
+      isPlainObject(value) && isPlainObject(foundValue)
+        ? { ...value, ...foundValue }
+        : value
+
+    return {
+      ...result,
+      [key]: mergedValue
+    }
+  }, {})
+}
+
+const mergeWithDefaultOptions = (options, esModules) => {
+  const defaults = defaultOptions(esModules)
+  return options == null ? defaults : merge(defaults, options)
+}
+
+const setupImportPlugin = (options, esModules) => [
+  ['transform-imports', mergeWithDefaultOptions(options, esModules)]
 ]
-
-export const hasLibraryName = target => target != null && 'libraryName' in target
-const isArrayOrDefault = (target, value) => Array.isArray(target) ? target : value
-const targetOrDefault = (target, value) => hasLibraryName(target) ? target.libraryName : value
-const match = (target, a) => ({libraryName: b}) => a === targetOrDefault(target, b)
-
-const isMissingIn =
-  target =>
-    ({libraryName: a}, index, source) =>
-      isArrayOrDefault(target, source).find(match(target, a)) == null
-
-const filterDefaultOptions = (options, esModules) =>
-  defaultOptions(esModules)
-    .filter(isMissingIn(options))
-
-const makeConcatenable = target => Array.isArray(target) ? target : [target]
-const concat = (a, b) => makeConcatenable(a).concat(makeConcatenable(b))
-
-const mergeWithDefaultOptions = (options, esModules) =>
-  options == null ? defaultOptions(esModules)
-    : concat(filterDefaultOptions(options, esModules), options)
-
-const setupImportPlugin = (options, esModules) =>
-  mergeWithDefaultOptions(options, esModules).map(option => ['import', option, option.libraryName])
 
 export default setupImportPlugin

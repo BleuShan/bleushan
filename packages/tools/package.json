@@ -20,7 +20,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.2",
+    "@babel/cli": "^7.2.3",
     "@bleushan/babel-preset-env": "^1.2.4",
     "@bleushan/eslint-config": "^1.2.2",
     "babel-core": "^7.0.0-bridge.0",

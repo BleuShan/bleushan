@@ -1,5 +1,5 @@
 import preset from '../'
-import { buildDefaultImportPluginSet } from '../__fixtures__/setupImportPlugin'
+import { buildDefaultImportPluginSettings } from '../__fixtures__/setupImportPlugin'
 
 jest.mock('@babel/helper-plugin-utils')
 
@@ -11,7 +11,7 @@ describe('preset', () => {
     const { modules, targets } = presetOptions
     const esModuleTarget = targets ? !!targets.esModules : false
     const esModules = modules === false || esModuleTarget
-    const importPlugins = buildDefaultImportPluginSet(esModules)
+    const importPlugins = buildDefaultImportPluginSettings(esModules)
     const testEnvPlugins =
       env === 'test'
         ? [
@@ -23,16 +23,21 @@ describe('preset', () => {
       decorators === 'legacy'
         ? [
             ['@babel/plugin-proposal-decorators', { legacy: true }],
-            ['@babel/plugin-proposal-class-properties', { loose: true }]
+            ['@babel/plugin-proposal-class-properties', { loose: true }],
+            ['@babel/plugin-proposal-private-methods', { loose: true }]
           ]
         : decorators === false
-        ? ['@babel/plugin-proposal-class-properties']
+        ? [
+            '@babel/plugin-proposal-class-properties',
+            '@babel/plugin-proposal-private-methods'
+          ]
         : [
             [
               '@babel/plugin-proposal-decorators',
               { decoratorsBeforeExport: true }
             ],
-            '@babel/plugin-proposal-class-properties'
+            '@babel/plugin-proposal-class-properties',
+            '@babel/plugin-proposal-private-methods'
           ]
     const plugins = [
       ...decoratorsPlugins,

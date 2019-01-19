@@ -1,24 +1,72 @@
-export const buildDefaultImportPluginSet = esModules => [
-  ['import', {
-    libraryName: 'recompose',
-    libraryDirectory: '',
-    camel2DashComponentName: false
-  }, 'recompose'],
-  ['import', {
-    libraryName: 'lodash',
-    libraryDirectory: '',
-    camel2DashComponentName: false
-  }, 'lodash'],
-  ['import', {
-    libraryName: 'lodash/fp',
-    libraryDirectory: '',
-    camel2DashComponentName: false
-  }, 'lodash/fp'],
-  ['import', {
-    libraryName: 'ramda',
-    libraryDirectory: esModules ? 'es' : 'src',
-    camel2DashComponentName: false
-  }, 'ramda']
+/* eslint-disable no-template-curly-in-string */
+export const buildDefaultImportPluginSettings = esModules => [
+  [
+    'transform-imports',
+    {
+      lodash: {
+        transform: 'lodash/${member}',
+        preventFullImport: true
+      },
+      'lodash/fp': {
+        transform: 'lodash/fp/${member}',
+        preventFullImport: true
+      },
+      ramda: {
+        transform: esModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
+        preventFullImport: true
+      }
+    }
+  ]
 ]
 
-export const buildImportPluginEntryFromOptions = options => ['import', options, options.libraryName]
+export const buildExpectedOptions = (options, esModules) => [
+  [
+    'transform-imports',
+    {
+      lodash: {
+        transform: 'lodash/${member}',
+        preventFullImport: true
+      },
+      'lodash/fp': {
+        transform: 'lodash/fp/${member}',
+        preventFullImport: true
+      },
+      ramda: {
+        transform: esModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
+        preventFullImport: true
+      },
+      ...options
+    }
+  ]
+]
+
+export const buildExpectedOptionsWithOverrides = (options, esModules) => {
+  const { 'lodash/fp': lfp = {}, lodash = {}, ramda = {}, ...rest } = options
+  return [
+    [
+      'transform-imports',
+      {
+        lodash: {
+          ...{
+            transform: 'lodash/${member}',
+            preventFullImport: true
+          },
+          ...lodash
+        },
+        'lodash/fp': {
+          ...{
+            transform: 'lodash/fp/${member}',
+            preventFullImport: true
+          },
+          ...lfp
+        },
+        ramda: {
+          transform: esModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
+          preventFullImport: true,
+          ...ramda
+        },
+        ...rest
+      }
+    ]
+  ]
+}

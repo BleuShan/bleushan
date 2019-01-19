@@ -147,9 +147,9 @@ For more information about configuration options see the [preset doc][3.1]
 
 - Minification is turned off on `test` environment because it messed up [`jest`][4] mocking.
 
-#### ant-design/babel-plugin-import
+#### babel-plugin-transform-imports
 
-By default we provide mappings for `ramda`, `lodash`, `lodash/fp` and `recompose`. To add an
+By default we provide mappings for `ramda`, `lodash`, `lodash/fp`. To add an
 entry:
 
 ```json
@@ -157,10 +157,11 @@ entry:
   "preset": [
     "@bleushan/babel-preset-env"
     {
-      "import":  {
-        "libraryName": "testLib",
-        "libraryDirectory": "lib",
-        "camel2DashComponentName": false
+      "import": {
+        "react-bootstrap": {
+          "transform": "react-bootstrap/lib/${member}",
+          "preventFullImport": true
+        }
       }
     }
   ]
@@ -174,27 +175,25 @@ to add a bunch of entries:
   "preset": [
     "@bleushan/babel-preset-env"
     {
-      "import": [
-        {
-          "libraryName": "testLib",
-          "libraryDirectory": "lib",
-          "camel2DashComponentName": false
+      "import":  {
+        "react-bootstrap": {
+          "transform": "react-bootstrap/lib/${member}",
+          "preventFullImport": true
         },
-        {
-          "libraryName": "testLib2",
-          "libraryDirectory": "lib",
-          "camel2DashComponentName": false
-        },
-      ]
+        "my-library\/?(((\\w*)?\/?)*)": {
+          "transform": "my-library/${1}/${member}",
+          "preventFullImport": true
+        }
+      }
     }
   ]
 }
 ```
 
-Please refer to [`ant-design/babel-plugin-import`][2] for how to configure entries.
+Please refer to [`babel-plugin-transform-imports`][2] documentation for how to configure entries.
 
 [1]: https://github.com/babel/babel/tree/master/packages/babel-preset-env
-[2]: https://github.com/ant-design/babel-plugin-import
+[2]: https://bitbucket.org/amctheatres/babel-transform-imports
 [3]: https://github.com/babel/minify/tree/master/packages/babel-preset-minify
 [3.1]: https://github.com/babel/minify/tree/master/packages/babel-preset-minify#options
 [4]: https://github.com/facebook/jest

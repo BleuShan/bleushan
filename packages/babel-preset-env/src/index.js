@@ -1,11 +1,7 @@
 import setupImportPlugin from './setupImportPlugin'
 import setupProposalClassPlugins from './setupProposalClassPlugins'
 import { declare } from '@babel/helper-plugin-utils'
-
-const isPlainObject = object =>
-  !!object &&
-  typeof object === 'object' &&
-  Object.prototype.toString.call(object) === '[object Object]'
+import { isPlainObject } from './utils'
 
 const MINIFY_DEFAULTS = {
   keepFnName: true,

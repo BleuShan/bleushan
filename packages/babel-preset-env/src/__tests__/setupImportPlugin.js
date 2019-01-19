@@ -1,6 +1,8 @@
+/* eslint-disable no-template-curly-in-string */
 import {
-  buildDefaultImportPluginSet,
-  buildImportPluginEntryFromOptions
+  buildDefaultImportPluginSettings,
+  buildExpectedOptions,
+  buildExpectedOptionsWithOverrides
 } from '../__fixtures__/setupImportPlugin'
 import setupImportPlugin from '../setupImportPlugin'
 
@@ -10,45 +12,76 @@ describe('setupImportPlugin', () => {
     describe('with esmodule', () => {
       const esmodule = true
       it('should use create the default options', () => {
-        expect(setupImportPlugin(options, esmodule)).toEqual(buildDefaultImportPluginSet(esmodule))
+        expect(setupImportPlugin(options, esmodule)).toEqual(
+          buildDefaultImportPluginSettings(esmodule)
+        )
       })
     })
 
     describe('without esmodule', () => {
       const esmodule = false
       it('should use create the default options', () => {
-        expect(setupImportPlugin(options, esmodule)).toEqual(buildDefaultImportPluginSet(esmodule))
+        expect(setupImportPlugin(options, esmodule)).toEqual(
+          buildDefaultImportPluginSettings(esmodule)
+        )
       })
     })
   })
 
   describe('with an option', () => {
     const options = {
-      libraryName: 'testLib',
-      libraryDirectory: 'lib',
-      camel2DashComponentName: false
+      testLib: {
+        transform: 'testLib/lib/${member}',
+        preventFullImport: true
+      }
     }
-
-    const expectedOptions = esmodule => buildDefaultImportPluginSet(esmodule).concat([
-      buildImportPluginEntryFromOptions(options)
-    ])
 
     describe('with esmodule', () => {
       const esmodule = true
       it('should use create the default options', () => {
-        expect(setupImportPlugin(options, esmodule)).toEqual(expectedOptions(esmodule))
+        expect(setupImportPlugin(options, esmodule)).toEqual(
+          buildExpectedOptions(options, esmodule)
+        )
       })
     })
 
     describe('without esmodule', () => {
       const esmodule = false
       it('should use create the default options', () => {
-        expect(setupImportPlugin(options, esmodule)).toEqual(expectedOptions(esmodule))
+        expect(setupImportPlugin(options, esmodule)).toEqual(
+          buildExpectedOptions(options, esmodule)
+        )
       })
     })
   })
 
-  describe('with some options', () => {
+  describe('with invalid option', () => {
+    const options = {
+      libraryName: 'testLib',
+      libraryDirectory: 'lib',
+      camel2DashComponentName: false
+    }
+
+    describe('with esmodule', () => {
+      const esmodule = true
+      it('should use create the default options', () => {
+        expect(setupImportPlugin(options, esmodule)).toEqual(
+          buildDefaultImportPluginSettings(esmodule)
+        )
+      })
+    })
+
+    describe('without esmodule', () => {
+      const esmodule = false
+      it('should use create the default options', () => {
+        expect(setupImportPlugin(options, esmodule)).toEqual(
+          buildDefaultImportPluginSettings(esmodule)
+        )
+      })
+    })
+  })
+
+  describe('with invalid options', () => {
     const options = [
       {
         libraryName: 'testLib',
@@ -57,26 +90,59 @@ describe('setupImportPlugin', () => {
       },
       {
         libraryName: 'testLib2',
-        libraryDirectory: 'src',
+        libraryDirectory: 'lib',
         camel2DashComponentName: false
       }
     ]
 
-    const expectedOptions =
-      esmodule => buildDefaultImportPluginSet(esmodule)
-        .concat(options.map(buildImportPluginEntryFromOptions))
-
     describe('with esmodule', () => {
       const esmodule = true
       it('should use create the default options', () => {
-        expect(setupImportPlugin(options, esmodule)).toEqual(expectedOptions(esmodule))
+        expect(setupImportPlugin(options, esmodule)).toEqual(
+          buildDefaultImportPluginSettings(esmodule)
+        )
       })
     })
 
     describe('without esmodule', () => {
       const esmodule = false
       it('should use create the default options', () => {
-        expect(setupImportPlugin(options, esmodule)).toEqual(expectedOptions(esmodule))
+        expect(setupImportPlugin(options, esmodule)).toEqual(
+          buildDefaultImportPluginSettings(esmodule)
+        )
+      })
+    })
+  })
+
+  describe('with some overrides', () => {
+    const options = {
+      lodash: {
+        preventFullImport: false
+      },
+      'lodash/fp': {
+        transform: 'lodash-es/fp/${member}'
+      },
+      testLib: {
+        transform: 'testLib/lib/${member}',
+        preventFullImport: true
+      }
+    }
+
+    describe('with esmodule', () => {
+      const esmodule = true
+      it('should use create the default options', () => {
+        expect(setupImportPlugin(options, esmodule)).toEqual(
+          buildExpectedOptionsWithOverrides(options, esmodule)
+        )
+      })
+    })
+
+    describe('without esmodule', () => {
+      const esmodule = false
+      it('should use create the default options', () => {
+        expect(setupImportPlugin(options, esmodule)).toEqual(
+          buildExpectedOptionsWithOverrides(options, esmodule)
+        )
       })
     })
   })
