@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@1.2.4...@bleushan/babel-preset-env@2.0.0) (2019-01-19)
+
+
+### Features
+
+* **babel-preset-env:** add private fields and replace babel-plugin-import by babel-plugin-transform ([e0ba479](https://github.com/BleuShan/bleushan/commit/e0ba479))
+
+
+### BREAKING CHANGES
+
+* **babel-preset-env:** `babel-plugin-import` is replaced by `babel-plugin-transform-imports`
+
+
+
+
+
 ## [1.2.4](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@1.2.3...@bleushan/babel-preset-env@1.2.4) (2018-12-01)
 
 

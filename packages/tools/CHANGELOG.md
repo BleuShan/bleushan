@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/BleuShan/bleushan/compare/@bleushan/tools@1.0.11...@bleushan/tools@2.0.0) (2019-01-19)
+
+
+### Features
+
+* **babel-preset-env:** add private fields and replace babel-plugin-import by babel-plugin-transform ([e0ba479](https://github.com/BleuShan/bleushan/commit/e0ba479))
+
+
+### BREAKING CHANGES
+
+* **babel-preset-env:** `babel-plugin-import` is replaced by `babel-plugin-transform-imports`
+
+
+
+
+
 ## [1.0.11](https://github.com/BleuShan/bleushan/compare/@bleushan/tools@1.0.10...@bleushan/tools@1.0.11) (2018-12-01)
 
 **Note:** Version bump only for package @bleushan/tools
