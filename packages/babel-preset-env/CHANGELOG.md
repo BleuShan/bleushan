@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@2.0.0...@bleushan/babel-preset-env@2.1.0) (2019-02-27)
+
+
+### Features
+
+* **babel-preset:** add latest babel support ([52290b5](https://github.com/BleuShan/bleushan/commit/52290b5))
+
+
+
+
+
 # [2.0.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@1.2.4...@bleushan/babel-preset-env@2.0.0) (2019-01-19)
 
 
