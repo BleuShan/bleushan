@@ -8,6 +8,7 @@ notifications:
   email: false
 node_js:
   - '10'
+  - '11'
 before_install: .travis/before_install.sh
 deploy:
   provider: script
