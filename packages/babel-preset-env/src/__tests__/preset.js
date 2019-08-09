@@ -12,13 +12,6 @@ describe('preset', () => {
     const esModuleTarget = targets ? !!targets.esModules : false
     const esModules = modules === false || esModuleTarget
     const importPlugins = buildDefaultImportPluginSettings(esModules)
-    const testEnvPlugins =
-      env === 'test'
-        ? [
-            'babel-plugin-dynamic-import-node',
-            '@babel/plugin-transform-modules-commonjs'
-          ]
-        : []
     const decoratorsPlugins =
       decorators === 'legacy'
         ? [
@@ -45,8 +38,7 @@ describe('preset', () => {
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-proposal-export-default-from',
       '@babel/plugin-proposal-export-namespace-from',
-      ...importPlugins,
-      ...testEnvPlugins
+      ...importPlugins
     ]
 
     const minifyPreset =

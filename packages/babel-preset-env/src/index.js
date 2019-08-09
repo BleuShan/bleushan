@@ -25,20 +25,13 @@ export default declare((api, options) => {
       ? { decorators, decoratorsBeforeExport }
       : false
   const isTest = api.env() === 'test'
-  const testEnvPlugins = isTest
-    ? [
-        'babel-plugin-dynamic-import-node',
-        '@babel/plugin-transform-modules-commonjs'
-      ]
-    : []
   const plugins = [
     ...setupProposalClassPlugins(decoratorsOptions),
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-export-namespace-from',
-    ...importPlugins,
-    ...testEnvPlugins
+    ...importPlugins
   ]
 
   const { env: minifyEnv, useDefaults, ...minifyRoot } = isPlainObject(minify)
