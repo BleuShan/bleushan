@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@2.2.0...@bleushan/babel-preset-env@2.2.1) (2019-08-09)
+
+
+### Bug Fixes
+
+* **babel-plugin:** make use of babel built-in  dynamic import support ([559cdc6](https://github.com/BleuShan/bleushan/commit/559cdc6))
+
+
+
+
+
 # [2.2.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@2.1.0...@bleushan/babel-preset-env@2.2.0) (2019-04-05)
 
 
