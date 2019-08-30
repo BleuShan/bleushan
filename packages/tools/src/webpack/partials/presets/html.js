@@ -22,25 +22,26 @@ const TABOO_SETTINGS_MERGE_KEYS = [
 const isDefault = curry((key, value) => isNil(value) || equals(DEFAULTS[key], value))
 const isDefaultTemplate = isDefault('template')
 
-const getTemplateParameters =
-get(choose(({template, templateParameters}) =>
-  isNil(templateParameters) && isDefaultTemplate(template)
-    ? propsOf(DEFAULTS.templateParameters)
-    : ['templateParameters']))
+const getTemplateParameters = get(
+  choose(({template, templateParameters}) =>
+    isNil(templateParameters) && isDefaultTemplate(template)
+      ? propsOf(DEFAULTS.templateParameters)
+      : ['templateParameters']
+  )
+)
 
 const valueOrDefault = curry((key, data) => get([key, valueOr(DEFAULTS[key])], data))
 const getTemplate = valueOrDefault('template')
 const getFavicon = valueOrDefault('favicon')
 
-const mergeWithDefaults =
-(settings) => {
+const mergeWithDefaults = (settings) => {
   const settingsTemplateParameters = getTemplateParameters(settings)
   const template = getTemplate(settings)
   const favicon = getFavicon(settings)
   const templateParameters =
-  isDefaultTemplate(settings.template) && not(is(Function, settingsTemplateParameters))
-    ? {...DEFAULTS.templateParameters, ...settingsTemplateParameters}
-    : settingsTemplateParameters
+    isDefaultTemplate(settings.template) && not(is(Function, settingsTemplateParameters))
+      ? {...DEFAULTS.templateParameters, ...settingsTemplateParameters}
+      : settingsTemplateParameters
   return {
     template,
     favicon,
@@ -49,8 +50,8 @@ const mergeWithDefaults =
   }
 }
 
-const html =
-curry((settings, config) =>
-  plugin('html-webpack-plugin', mergeWithDefaults(settings), config))
+const html = curry((settings, config) =>
+  plugin('html-webpack-plugin', mergeWithDefaults(settings), config)
+)
 
 export default html

@@ -1,41 +1,34 @@
 module.exports = {
-  extends: ['standard', 'cleanjs', 'plugin:jest/recommended', 'prettier'],
+  extends: [
+    'standard',
+    'plugin:jest/recommended',
+    'plugin:prettier/recommended',
+    'prettier/standard'
+  ],
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaFeatures: {
+      legacyDecorators: true
+    }
+  },
   env: {
     browser: true,
+    node: true,
     serviceworker: true,
     worker: true
   },
-  parser: 'babel-eslint',
+  globals: {
+    globalThis: false
+  },
   rules: {
-    'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
+    'no-console': ['error', {allow: ['error', 'warn']}],
     'space-before-function-paren': [
       'error',
-      {
-        anonymous: 'always',
-        named: 'never',
-        asyncArrow: 'always'
-      }
+      {anonymous: 'always', named: 'never', asyncArrow: 'always'}
     ],
-    'fp/no-rest-parameters': 'off'
+    'no-unused-expressions': 'off',
+    'babel/no-unused-expressions': 'error',
+    'spaced-comment': ['error', 'always', {markers: ['/', '?', '?.']}]
   },
-  overrides: [
-    {
-      files: [
-        '*-test.js',
-        '*.spec.js',
-        '*.test.js',
-        '**/__tests__/**/*.js',
-        '**/tests/**/*.js'
-      ],
-      rules: {
-        'fp/no-unused-expression': 'off',
-        'fp/no-nil': 'off',
-        'fp/no-this': 'off',
-        'fp/no-class': 'off',
-        'better/explicit-return': 'off',
-        'better/no-ifs': 'off',
-        'better/no-new': 'off'
-      }
-    }
-  ]
+  plugins: ['babel']
 }

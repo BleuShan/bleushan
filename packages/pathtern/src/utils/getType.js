@@ -1,5 +1,5 @@
-const { isArray } = Array
-const { isNaN } = Number
+const {isArray} = Array
+const {isNaN} = Number
 
 export default function getType(value) {
   return isArray(value)

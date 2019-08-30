@@ -11,9 +11,7 @@ describe('entry', () => {
         it('should set the entry field appropriately', () => {
           const expectedConfig = {
             entry: {
-              main: [
-                mainEntryPath
-              ]
+              main: [mainEntryPath]
             }
           }
 
@@ -41,9 +39,7 @@ describe('entry', () => {
       const keypath = []
       describe('and a config object', () => {
         const entriesConfig = {
-          main: [
-            './main'
-          ]
+          main: ['./main']
         }
 
         it('should set the the entry field appropriately', () => {

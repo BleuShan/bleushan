@@ -13,7 +13,6 @@ export default function isPlainObject(value) {
     !!value &&
     getType(value) === 'object' &&
     getTag(value) === '[object Object]' &&
-    (getPrototypeOf(value) == null ||
-      getRootProtoypeOf(value) === getPrototypeOf(value))
+    (getPrototypeOf(value) == null || getRootProtoypeOf(value) === getPrototypeOf(value))
   )
 }

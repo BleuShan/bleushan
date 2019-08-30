@@ -1,5 +1,5 @@
 const objectProtoToString = Object.prototype.toString
-const { isNaN } = Number
+const {isNaN} = Number
 export default function getTag(value) {
   return value == null
     ? value === undefined

@@ -16,7 +16,7 @@ describe('isString', () => {
     ${arrowFunction} | ${false}
     ${neString}      | ${true}
     ${emptyString}   | ${true}
-  `('when called $value', ({ value, expected }) => {
+  `('when called $value', ({value, expected}) => {
     it(`should return with ${expected}`, () => {
       expect(isString(value)).toEqual(expected)
     })

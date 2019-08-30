@@ -49,10 +49,7 @@ describe('loader', () => {
       expect(config).toEqual(expectedConfig)
     })
     it('should map an array of loader and options to the use props', () => {
-      const loaders = [
-        {loader: 'eslint-loader'},
-        {loader: 'babel-loader', options: {debug: true}}
-      ]
+      const loaders = [{loader: 'eslint-loader'}, {loader: 'babel-loader', options: {debug: true}}]
       const expectedConfig = {
         module: {
           rules: [
@@ -84,7 +81,8 @@ describe('loader', () => {
       const js = loader(/\.(js|jsx)$/)
       const config = pipe(
         js('babel-loader'),
-        js({options: {babelrc: false}}))({})
+        js({options: {babelrc: false}})
+      )({})
       expect(config).toEqual(expectedConfig)
     })
   })
@@ -106,9 +104,7 @@ describe('loader', () => {
         rules: [
           {
             test: /\.(tsx?)$/,
-            use: [
-              {loader: 'ts-loader'}
-            ]
+            use: [{loader: 'ts-loader'}]
           }
         ]
       }
@@ -141,10 +137,7 @@ describe('loader', () => {
           rules: [
             {
               test: /\.(tsx?)$/,
-              use: [
-                {loader: 'ts-loader'},
-                {loader: 'babel-loader'}
-              ]
+              use: [{loader: 'ts-loader'}, {loader: 'babel-loader'}]
             }
           ]
         }
@@ -161,10 +154,7 @@ describe('loader', () => {
           rules: [
             {
               test: /\.(tsx?)$/,
-              use: [
-                {loader: 'ts-loader'},
-                {loader: 'babel-loader'}
-              ]
+              use: [{loader: 'ts-loader'}, {loader: 'babel-loader'}]
             }
           ]
         }

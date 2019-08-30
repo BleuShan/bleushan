@@ -19,7 +19,7 @@ describe('isPlainObject', () => {
     ${undefined}          | ${false}
     ${arrowFunction}      | ${false}
     ${neString}           | ${false}
-  `('when called $value', ({ value, expected }) => {
+  `('when called $value', ({value, expected}) => {
     it(`should return with ${expected}`, () => {
       expect(isPlainObject(value)).toEqual(expected)
     })

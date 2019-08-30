@@ -20,7 +20,7 @@ describe('getType', () => {
     ${numberArray}        | ${'array'}
     ${fn}                 | ${typeof fn}
     ${neString}           | ${typeof neString}
-  `(`when called with $value`, ({ value, result }) => {
+  `(`when called with $value`, ({value, result}) => {
     it(`should yield ${result}`, () => {
       expect(getType(value)).toEqual(result)
     })

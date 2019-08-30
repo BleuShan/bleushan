@@ -8,7 +8,7 @@ export class DummyClass {
     return this.name
   }
 }
-export const arrowFunction = i => i
+export const arrowFunction = (i) => i
 export function fn(i) {
   return i
 }

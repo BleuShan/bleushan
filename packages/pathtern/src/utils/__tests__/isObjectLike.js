@@ -18,7 +18,7 @@ describe('isObjectLike', () => {
     ${null}               | ${false}
     ${arrowFunction}      | ${false}
     ${neString}           | ${false}
-  `('when called $value', ({ value, expected }) => {
+  `('when called $value', ({value, expected}) => {
     it(`should return with ${expected}`, () => {
       expect(isObjectLike(value)).toEqual(expected)
     })

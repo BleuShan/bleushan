@@ -1,34 +1,25 @@
 import preset from '../'
-import { buildDefaultImportPluginSettings } from '../__fixtures__/setupImportPlugin'
+import {buildDefaultImportPluginSettings} from '../__fixtures__/setupImportPlugin'
 
 jest.mock('@babel/helper-plugin-utils')
 
 describe('preset', () => {
-  const expectedResult = (
-    env,
-    { import: _import, minify, decorators, ...presetOptions }
-  ) => {
-    const { modules, targets } = presetOptions
+  const expectedResult = (env, {import: _import, minify, decorators, ...presetOptions}) => {
+    const {modules, targets} = presetOptions
     const esModuleTarget = targets ? !!targets.esModules : false
     const esModules = modules === false || esModuleTarget
     const importPlugins = buildDefaultImportPluginSettings(esModules)
     const decoratorsPlugins =
       decorators === 'legacy'
         ? [
-            ['@babel/plugin-proposal-decorators', { legacy: true }],
-            ['@babel/plugin-proposal-class-properties', { loose: true }],
-            ['@babel/plugin-proposal-private-methods', { loose: true }]
+            ['@babel/plugin-proposal-decorators', {legacy: true}],
+            ['@babel/plugin-proposal-class-properties', {loose: true}],
+            ['@babel/plugin-proposal-private-methods', {loose: true}]
           ]
         : decorators === false
-        ? [
-            '@babel/plugin-proposal-class-properties',
-            '@babel/plugin-proposal-private-methods'
-          ]
+        ? ['@babel/plugin-proposal-class-properties', '@babel/plugin-proposal-private-methods']
         : [
-            [
-              '@babel/plugin-proposal-decorators',
-              { decoratorsBeforeExport: true }
-            ],
+            ['@babel/plugin-proposal-decorators', {decoratorsBeforeExport: true}],
             '@babel/plugin-proposal-class-properties',
             '@babel/plugin-proposal-private-methods'
           ]
@@ -100,11 +91,9 @@ describe('preset', () => {
       decorators
       ${false}
       ${'legacy'}
-    `('with decorators set to $options', ({ decorators }) => {
+    `('with decorators set to $options', ({decorators}) => {
       it('should build the right plugin set', () => {
-        expect(preset(env, { decorators })).toEqual(
-          expectedResult(env, { decorators })
-        )
+        expect(preset(env, {decorators})).toEqual(expectedResult(env, {decorators}))
       })
     })
 
@@ -147,7 +136,7 @@ describe('preset', () => {
             }
             it('should desactivate minifcation', () => {
               const result = preset(env, options)
-              expect(result).toEqual(expectedResult(env, { minify: false }))
+              expect(result).toEqual(expectedResult(env, {minify: false}))
             })
           })
 
@@ -164,7 +153,7 @@ describe('preset', () => {
             }
             it('should desactivate minifcation', () => {
               const result = preset(env, options)
-              expect(result).toEqual(expectedResult(env, { minify: {} }))
+              expect(result).toEqual(expectedResult(env, {minify: {}}))
             })
           })
         })
@@ -183,9 +172,7 @@ describe('preset', () => {
             }
             it('should use the matching setting', () => {
               const result = preset(env, options)
-              expect(result).toEqual(
-                expectedResult(env, { minify: { keepClassName: false } })
-              )
+              expect(result).toEqual(expectedResult(env, {minify: {keepClassName: false}}))
             })
           })
 
@@ -199,7 +186,7 @@ describe('preset', () => {
             }
             it('should use the matching setting', () => {
               const result = preset(env, options)
-              expect(result).toEqual(expectedResult(env, { minify: false }))
+              expect(result).toEqual(expectedResult(env, {minify: false}))
             })
           })
         })

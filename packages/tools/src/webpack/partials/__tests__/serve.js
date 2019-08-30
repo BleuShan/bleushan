@@ -7,9 +7,7 @@ describe('serve', () => {
     it('should add the serve key properly', () => {
       const expectedConfig = {
         serve: {
-          content: [
-            __dirname
-          ]
+          content: [__dirname]
         }
       }
 
@@ -20,26 +18,20 @@ describe('serve', () => {
   describe('with an existing config', () => {
     const config = {
       serve: {
-        content: [
-          __dirname
-        ]
+        content: [__dirname]
       }
     }
 
     it('should merge serve key properly', () => {
       const add = () => 'hey'
       const options = {
-        content: [
-          'bob'
-        ],
+        content: ['bob'],
         add
       }
 
       const expectedConfig = {
         serve: {
-          content: [
-            __dirname
-          ],
+          content: [__dirname],
           add
         }
       }

@@ -59,9 +59,7 @@ describe('configure', () => {
     const entries = entry([])
 
     describe('with a single partial', () => {
-      const preset = configure([
-        babel
-      ])
+      const preset = configure([babel])
 
       describe('with an empty config', () => {
         const expectedConfig = {
@@ -87,9 +85,7 @@ describe('configure', () => {
       const preset = configure([
         entries({
           main: ['./main'],
-          vendor: [
-            'react'
-          ]
+          vendor: ['react']
         }),
         babel
       ])
@@ -100,9 +96,7 @@ describe('configure', () => {
           devtool: 'cheap-module-eval-source-map',
           entry: {
             main: ['./main'],
-            vendor: [
-              'react'
-            ]
+            vendor: ['react']
           },
           module: {
             rules: [

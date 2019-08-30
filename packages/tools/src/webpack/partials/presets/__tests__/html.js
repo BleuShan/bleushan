@@ -130,9 +130,7 @@ describe('html', () => {
 
       describe('with a function templateParameters', () => {
         const settings = {
-          templateParameters: () => {
-
-          }
+          templateParameters: () => {}
         }
         const expectedSettings = {
           template: resolve(__dirname, '../', 'assets', 'index.ejs'),

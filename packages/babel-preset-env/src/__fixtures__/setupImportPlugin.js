@@ -1,5 +1,5 @@
 /* eslint-disable no-template-curly-in-string */
-export const buildDefaultImportPluginSettings = esModules => [
+export const buildDefaultImportPluginSettings = (esModules) => [
   [
     'transform-imports',
     {
@@ -41,7 +41,7 @@ export const buildExpectedOptions = (options, esModules) => [
 ]
 
 export const buildExpectedOptionsWithOverrides = (options, esModules) => {
-  const { 'lodash/fp': lfp = {}, lodash = {}, ramda = {}, ...rest } = options
+  const {'lodash/fp': lfp = {}, lodash = {}, ramda = {}, ...rest} = options
   return [
     [
       'transform-imports',

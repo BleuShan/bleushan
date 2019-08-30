@@ -1,7 +1,7 @@
-import { isPlainObject } from './utils'
+import {isPlainObject} from './utils'
 
 /* eslint-disable no-template-curly-in-string */
-const defaultOptions = esModules => ({
+const defaultOptions = (esModules) => ({
   lodash: {
     transform: 'lodash/${member}',
     preventFullImport: true
@@ -20,21 +20,17 @@ const merge = (a, b) => {
   const aEntries = Array.from(Object.entries(a))
   const bEntries = isPlainObject(b) ? Array.from(Object.entries(b)) : []
   const missingEntries = bEntries.filter(
-    ([key, value]) =>
-      aEntries.find(([aKey]) => aKey === key) == null && isPlainObject(value)
+    ([key, value]) => aEntries.find(([aKey]) => aKey === key) == null && isPlainObject(value)
   )
   const commonEntries = bEntries.filter(
-    ([key, value]) =>
-      aEntries.find(([aKey]) => aKey === key) != null && isPlainObject(value)
+    ([key, value]) => aEntries.find(([aKey]) => aKey === key) != null && isPlainObject(value)
   )
 
   return aEntries.concat(missingEntries).reduce((result, [key, value]) => {
     const foundEntry = commonEntries.find(([itemKey]) => itemKey === key)
     const foundValue = foundEntry ? foundEntry[1] : foundEntry
     const mergedValue =
-      isPlainObject(value) && isPlainObject(foundValue)
-        ? { ...value, ...foundValue }
-        : value
+      isPlainObject(value) && isPlainObject(foundValue) ? {...value, ...foundValue} : value
 
     return {
       ...result,

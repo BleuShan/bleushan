@@ -3,9 +3,7 @@ import babel from '../babel'
 
 describe('babel', () => {
   describe('with no options', () => {
-    const preset = configure([
-      babel(undefined)
-    ])
+    const preset = configure([babel(undefined)])
 
     describe('with empty config', () => {
       const config = {}
@@ -29,9 +27,7 @@ describe('babel', () => {
     })
   })
   describe('with some options', () => {
-    const preset = configure([
-      babel({babelrc: false})
-    ])
+    const preset = configure([babel({babelrc: false})])
 
     describe('with empty config', () => {
       const config = {}

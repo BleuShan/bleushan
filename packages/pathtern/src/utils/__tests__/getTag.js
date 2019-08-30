@@ -20,7 +20,7 @@ describe('getTag', () => {
     ${numberArray}        | ${'[object Array]'}
     ${fn}                 | ${'[object Function]'}
     ${neString}           | ${'[object String]'}
-  `(`when called with $value`, ({ value, result }) => {
+  `(`when called with $value`, ({value, result}) => {
     it(`should yield ${result}`, () => {
       expect(getTag(value)).toEqual(result)
     })

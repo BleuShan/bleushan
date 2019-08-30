@@ -9,9 +9,7 @@ describe('plugin', () => {
   })
 
   const configWithFakePlugin = {
-    plugins: [
-      Reflect.construct(FakePlugin, {test: true})
-    ]
+    plugins: [Reflect.construct(FakePlugin, {test: true})]
   }
 
   describe('with an empty config', () => {
@@ -34,9 +32,7 @@ describe('plugin', () => {
       describe('when no arguments are passed in', () => {
         it('should add the plugin', () => {
           const expectedConfig = {
-            plugins: [
-              {test: true}
-            ]
+            plugins: [{test: true}]
           }
           const config = plugin(identity({test: true}), [])({})
           expect(config).toEqual(expectedConfig)
@@ -47,10 +43,7 @@ describe('plugin', () => {
   describe('with an existing config', () => {
     it('should add plugin the', () => {
       const expectedConfig = {
-        plugins: [
-          Reflect.construct(FakePlugin, {test: true}),
-          {test: true}
-        ]
+        plugins: [Reflect.construct(FakePlugin, {test: true}), {test: true}]
       }
 
       const config = plugin(identity({test: true}), undefined)(configWithFakePlugin)

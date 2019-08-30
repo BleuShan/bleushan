@@ -3,26 +3,18 @@ import isPlainObject from './utils/isPlainObject.js'
 import getTag from './utils/getTag.js'
 import getType from './utils/getType.js'
 import splitPath from './splitPath.js'
-import { PARAM_KEY_REGEXP } from './constants.js'
+import {PARAM_KEY_REGEXP} from './constants.js'
 
-const getIncompatibleRouteConfigMessage = value =>
-  `Provided route config is incompatible. Expected ${getTag({})} ${getTag(
-    value
-  )}`
+const getIncompatibleRouteConfigMessage = (value) =>
+  `Provided route config is incompatible. Expected ${getTag({})} ${getTag(value)}`
 
 function deserializeParamValue(value, deserializerKey) {
   const number = Number.parseFloat(value)
-  return Number.isNaN(number) || getType(value) === deserializerKey
-    ? value
-    : number
+  return Number.isNaN(number) || getType(value) === deserializerKey ? value : number
 }
 
 function extractParamKey(pathComponent) {
-  return (
-    pathComponent
-      ?.match(PARAM_KEY_REGEXP)
-      ?.filter(v => v && v !== pathComponent) || []
-  )
+  return pathComponent?.match(PARAM_KEY_REGEXP)?.filter((v) => v && v !== pathComponent) || []
 }
 
 function getPartialMatchResult(path, candidatePath, candidateValue) {
@@ -32,12 +24,9 @@ function getPartialMatchResult(path, candidatePath, candidateValue) {
     ? pathComponents?.reduce(
         ([currentPath, candidateValue, args, count], pathComponent, index) => {
           const candidatePathComponent = candidatePathComponents[index]
-          const [paramKey, deserializerKey] = extractParamKey(
-            candidatePathComponent
-          )
+          const [paramKey, deserializerKey] = extractParamKey(candidatePathComponent)
           const nextCount =
-            candidatePathComponent === pathComponent ||
-            (count > 1 && paramKey != null)
+            candidatePathComponent === pathComponent || (count > 1 && paramKey != null)
               ? count + 1
               : count
 
@@ -45,28 +34,15 @@ function getPartialMatchResult(path, candidatePath, candidateValue) {
             paramKey != null
               ? {
                   ...args,
-                  [paramKey]: deserializeParamValue(
-                    pathComponent,
-                    deserializerKey
-                  )
+                  [paramKey]: deserializeParamValue(pathComponent, deserializerKey)
                 }
               : args
 
-          return [
-            nextCount >= 2 ? path : currentPath,
-            candidateValue,
-            nextArgs,
-            nextCount
-          ]
+          return [nextCount >= 2 ? path : currentPath, candidateValue, nextArgs, nextCount]
         },
         ['', candidateValue, {}, 0]
       )
-    : [
-        path.startsWith(candidatePath) && candidatePath !== '/'
-          ? candidatePath
-          : '',
-        candidateValue
-      ]
+    : [path.startsWith(candidatePath) && candidatePath !== '/' ? candidatePath : '', candidateValue]
 }
 
 function getResult(path, candidateRoute) {
@@ -79,7 +55,6 @@ function getResult(path, candidateRoute) {
 
 export default function match(path, routes) {
   const isRoutesObject = isPlainObject(routes)
-  // eslint-disable-next-line fp/no-unused-expression
   invariant(!isRoutesObject, getIncompatibleRouteConfigMessage(routes), 'match')
   const entries = Object.entries(routes)
   const [routedPath, routedValue, args] = entries.reduce(

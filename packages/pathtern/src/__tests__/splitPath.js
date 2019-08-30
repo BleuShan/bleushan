@@ -26,7 +26,7 @@ describe('splitPath', () => {
       ${'/{test:base64}/:slug'}       | ${['/', '{test:base64}', ':slug']}
       ${'test/hello'}                 | ${['test', 'hello']}
       ${'test'}                       | ${['test']}
-    `('$path should return with $expected', ({ path, expected }) => {
+    `('$path should return with $expected', ({path, expected}) => {
       expect(splitPath(path)).toEqual(expected)
     })
   })
@@ -45,7 +45,7 @@ describe('splitPath', () => {
         arrowFunction,
         null,
         undefined
-      ].map(invalidPath => [invalidPath, []])
+      ].map((invalidPath) => [invalidPath, []])
     )('%p should return with %p', (path, expected) => {
       expect(splitPath(path)).toEqual(expected)
     })

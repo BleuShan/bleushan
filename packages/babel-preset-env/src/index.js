@@ -1,7 +1,7 @@
 import setupImportPlugin from './setupImportPlugin'
 import setupProposalClassPlugins from './setupProposalClassPlugins'
-import { declare } from '@babel/helper-plugin-utils'
-import { isPlainObject } from './utils'
+import {declare} from '@babel/helper-plugin-utils'
+import {isPlainObject} from './utils'
 
 const MINIFY_DEFAULTS = {
   keepFnName: true,
@@ -16,13 +16,13 @@ export default declare((api, options) => {
     decoratorsBeforeExport,
     ...presetOptions
   } = options
-  const { modules, targets } = presetOptions
+  const {modules, targets} = presetOptions
   const esModuleTarget = targets ? !!targets.esModules : false
   const esModules = modules === false || esModuleTarget
   const importPlugins = setupImportPlugin(importOptions, esModules)
   const decoratorsOptions =
     decorators != null || decoratorsBeforeExport != null
-      ? { decorators, decoratorsBeforeExport }
+      ? {decorators, decoratorsBeforeExport}
       : false
   const isTest = api.env() === 'test'
   const plugins = [
@@ -34,7 +34,7 @@ export default declare((api, options) => {
     ...importPlugins
   ]
 
-  const { env: minifyEnv, useDefaults, ...minifyRoot } = isPlainObject(minify)
+  const {env: minifyEnv, useDefaults, ...minifyRoot} = isPlainObject(minify)
     ? minify
     : MINIFY_DEFAULTS
 
@@ -57,8 +57,7 @@ export default declare((api, options) => {
           ...minifyEnvSettings
         }
 
-  const minifyPreset =
-    minifySettings === false ? [] : [['minify', minifySettings]]
+  const minifyPreset = minifySettings === false ? [] : [['minify', minifySettings]]
 
   const presets = [
     ...minifyPreset,
