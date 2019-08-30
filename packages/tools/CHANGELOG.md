@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/BleuShan/bleushan/compare/@bleushan/tools@2.0.4...@bleushan/tools@2.1.0) (2019-08-30)
+
+
+### Features
+
+* **eslint-config:** ditch the old fp thing ([9e18131](https://github.com/BleuShan/bleushan/commit/9e18131))
+
+
+
+
+
 ## [2.0.4](https://github.com/BleuShan/bleushan/compare/@bleushan/tools@2.0.3...@bleushan/tools@2.0.4) (2019-08-30)
 
 **Note:** Version bump only for package @bleushan/tools
