@@ -28,7 +28,7 @@ export default declare((api, options) => {
   const plugins = [
     ...setupProposalClassPlugins(decoratorsOptions),
     '@babel/plugin-proposal-optional-chaining',
-    '@babel/plugin-syntax-dynamic-import',
+    '@babel/plugin-syntax-import-meta',
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-export-namespace-from',
     ...importPlugins

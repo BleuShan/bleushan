@@ -1,56 +1,57 @@
 {
-    "name": "@bleushan/babel-preset-env",
-    "version": "2.2.1",
-    "description": "A slightly more complicated babel preset env",
-    "main": "lib/index.js",
-    "module": "src/index.js",
-    "jsnext:main": "src/index.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/BleuShan/bleushan.git"
-    },
-    "author": "Philippe Lafontaine <lafontaine.philippe@gmail.com>",
-    "license": "MIT",
-    "scripts": {
-        "build": "yarn clean && yarn compile",
-        "clean": "rimraf lib",
-        "compile": "babel src -d lib --ignore '**/__tests__,**/__mocks__,**/__fixtures__'",
-        "lint": "eslint --fix src",
-        "test": "jest"
-    },
-    "dependencies": {
-        "@babel/core": "^7.5.5",
-        "@babel/helper-plugin-utils": "^7.0.0",
-        "@babel/plugin-proposal-class-properties": "^7.5.5",
-        "@babel/plugin-proposal-decorators": "^7.4.0",
-        "@babel/plugin-proposal-export-default-from": "^7.2.0",
-        "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
-        "@babel/plugin-proposal-optional-chaining": "^7.2.0",
-        "@babel/plugin-proposal-private-methods": "^7.4.4",
-        "@babel/preset-env": "^7.5.5",
-        "babel-plugin-transform-imports": "^1.5.1",
-        "babel-preset-minify": "^0.5.0",
-        "core-js": "3",
-        "regenerator-runtime": "^0.13.2"
-    },
-    "devDependencies": {
-        "@babel/cli": "^7.2.3",
-        "@bleushan/eslint-config": "^1.2.2",
-        "babel-core": "^7.0.0-bridge.0",
-        "babel-jest": "^23.6.0",
-        "jest": "^23.6.0",
-        "rimraf": "^2.6.2"
-    },
-    "jest": {
-        "coveragePathIgnorePatterns": [
-            "/node_modules/",
-            "/__fixtures__/"
-        ],
-        "transform": {
-            "^.+\\.jsx?$": "../../scripts/jest/root-babel-jest.js"
-        }
-    },
-    "release": {
-        "branch": "master"
+  "name": "@bleushan/babel-preset-env",
+  "version": "2.2.1",
+  "description": "A slightly more complicated babel preset env",
+  "main": "lib/index.js",
+  "module": "src/index.js",
+  "jsnext:main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BleuShan/bleushan.git"
+  },
+  "author": "Philippe Lafontaine <lafontaine.philippe@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf lib",
+    "compile": "babel src -d lib --ignore '**/__tests__,**/__mocks__,**/__fixtures__'",
+    "lint": "eslint --fix src",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/helper-plugin-utils": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.4.0",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-proposal-private-methods": "^7.4.4",
+    "@babel/plugin-syntax-import-meta": "^7.2.0",
+    "@babel/preset-env": "^7.5.5",
+    "babel-plugin-transform-imports": "^1.5.1",
+    "babel-preset-minify": "^0.5.0",
+    "core-js": "3",
+    "regenerator-runtime": "^0.13.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@bleushan/eslint-config": "^1.2.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
+    "rimraf": "^2.6.2"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/__fixtures__/"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "../../scripts/jest/root-babel-jest.js"
     }
+  },
+  "release": {
+    "branch": "master"
+  }
 }
