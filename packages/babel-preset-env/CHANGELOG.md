@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@2.2.1...@bleushan/babel-preset-env@2.3.0) (2019-08-30)
+
+
+### Features
+
+* **babel-preset:** add import.meta support ([57a4457](https://github.com/BleuShan/bleushan/commit/57a4457))
+
+
+
+
+
 ## [2.2.1](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@2.2.0...@bleushan/babel-preset-env@2.2.1) (2019-08-09)
 
 

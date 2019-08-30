@@ -1,6 +1,6 @@
 {
   "name": "@bleushan/tools",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A collection of build tools helpers",
   "main": "lib/index.js",
   "module": "src/index.js",
@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@bleushan/babel-preset-env": "^2.2.1",
+    "@bleushan/babel-preset-env": "^2.3.0",
     "@bleushan/eslint-config": "^1.2.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
