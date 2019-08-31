@@ -17,7 +17,7 @@ export default declare((api, options) => {
     ...presetOptions
   } = options
   const {modules, targets} = presetOptions
-  const esModuleTarget = targets ? !!targets.esModules : false
+  const esModuleTarget = targets ? !!targets.esmodules : false
   const esModules = modules === false || esModuleTarget
   const importPlugins = setupImportPlugin(importOptions, esModules)
   const decoratorsOptions =

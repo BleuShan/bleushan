@@ -6,7 +6,7 @@ jest.mock('@babel/helper-plugin-utils')
 describe('preset', () => {
   const expectedResult = (env, {import: _import, minify, decorators, ...presetOptions}) => {
     const {modules, targets} = presetOptions
-    const esModuleTarget = targets ? !!targets.esModules : false
+    const esModuleTarget = targets ? !!targets.esmodules : false
     const esModules = modules === false || esModuleTarget
     const importPlugins = buildDefaultImportPluginSettings(esModules)
     const decoratorsPlugins =
@@ -67,10 +67,10 @@ describe('preset', () => {
 
   describe('in a development environment', () => {
     const env = 'development'
-    describe('with an esModules target', () => {
+    describe('with an esmodules target', () => {
       const options = {
         targets: {
-          esModules: true
+          esmodules: true
         }
       }
       it('should build the right plugin set', () => {
@@ -198,7 +198,7 @@ describe('preset', () => {
     const env = 'test'
     const options = {
       targets: {
-        esModules: false
+        esmodules: false
       }
     }
     it('should build the right plugin set', () => {

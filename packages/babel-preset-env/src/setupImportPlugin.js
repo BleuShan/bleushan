@@ -39,13 +39,13 @@ const merge = (a, b) => {
   }, {})
 }
 
-const mergeWithDefaultOptions = (options, esModules) => {
-  const defaults = defaultOptions(esModules)
+const mergeWithDefaultOptions = (options, esmodules) => {
+  const defaults = defaultOptions(esmodules)
   return options == null ? defaults : merge(defaults, options)
 }
 
-const setupImportPlugin = (options, esModules) => [
-  ['transform-imports', mergeWithDefaultOptions(options, esModules)]
+const setupImportPlugin = (options, esmodules) => [
+  ['transform-imports', mergeWithDefaultOptions(options, esmodules)]
 ]
 
 export default setupImportPlugin
