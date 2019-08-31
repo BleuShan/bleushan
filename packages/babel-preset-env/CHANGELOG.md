@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@2.4.0...@bleushan/babel-preset-env@2.4.1) (2019-08-31)
+
+
+### Bug Fixes
+
+* **babel-preset:** fix targets.esmodules ([1b30feb](https://github.com/BleuShan/bleushan/commit/1b30feb))
+
+
+
+
+
 # [2.4.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@2.3.0...@bleushan/babel-preset-env@2.4.0) (2019-08-30)
 
 
