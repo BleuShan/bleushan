@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/BleuShan/bleushan/compare/@bleushan/eslint-config@1.3.1...@bleushan/eslint-config@1.3.2) (2019-09-01)
+
+
+### Bug Fixes
+
+* **eslint-config:** fix for of false positive ([fb10b11](https://github.com/BleuShan/bleushan/commit/fb10b11))
+
+
+
+
+
 ## [1.3.1](https://github.com/BleuShan/bleushan/compare/@bleushan/eslint-config@1.3.0...@bleushan/eslint-config@1.3.1) (2019-08-31)
 
 
