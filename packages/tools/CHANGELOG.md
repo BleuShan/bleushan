@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.4](https://github.com/BleuShan/bleushan/compare/@bleushan/tools@2.1.3...@bleushan/tools@2.1.4) (2019-09-07)
+
+**Note:** Version bump only for package @bleushan/tools
+
+
+
+
+
 ## [2.1.3](https://github.com/BleuShan/bleushan/compare/@bleushan/tools@2.1.2...@bleushan/tools@2.1.3) (2019-09-01)
 
 **Note:** Version bump only for package @bleushan/tools

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@2.4.3...@bleushan/babel-preset-env@2.5.0) (2019-09-07)
+
+
+### Features
+
+* **babel-preset:** enable all proposal ([d59e2ce](https://github.com/BleuShan/bleushan/commit/d59e2ce))
+
+
+
+
+
 ## [2.4.3](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@2.4.2...@bleushan/babel-preset-env@2.4.3) (2019-09-01)
 
 **Note:** Version bump only for package @bleushan/babel-preset-env
