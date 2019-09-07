@@ -65,7 +65,10 @@ export default declare((api, options) => {
       '@babel/preset-env',
       {
         useBuiltIns: 'usage',
-        corejs: 3,
+        corejs: {
+          version: 3,
+          proposals: true
+        },
         spec: true,
         shippedProposals: true,
         ...presetOptions
