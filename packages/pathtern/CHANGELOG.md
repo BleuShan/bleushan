@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/BleuShan/bleushan/compare/@bleushan/pathtern@0.2.5...@bleushan/pathtern@1.0.0) (2019-10-25)
+
+
+### Bug Fixes
+
+* **babel-preset:** bump deps and ensure pnp compatibility ([541f889](https://github.com/BleuShan/bleushan/commit/541f889))
+
+
+### BREAKING CHANGES
+
+* **babel-preset:** core-js regenerator-runtime are now peerDependencies
+
+
+
+
+
 ## [0.2.5](https://github.com/BleuShan/bleushan/compare/@bleushan/pathtern@0.2.4...@bleushan/pathtern@0.2.5) (2019-10-25)
 
 **Note:** Version bump only for package @bleushan/pathtern

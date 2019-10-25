@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/BleuShan/bleushan/compare/@bleushan/tools@2.1.5...@bleushan/tools@3.0.0) (2019-10-25)
+
+
+### Bug Fixes
+
+* **babel-preset:** bump deps and ensure pnp compatibility ([541f889](https://github.com/BleuShan/bleushan/commit/541f889))
+
+
+### BREAKING CHANGES
+
+* **babel-preset:** core-js regenerator-runtime are now peerDependencies
+
+
+
+
+
 ## [2.1.5](https://github.com/BleuShan/bleushan/compare/@bleushan/tools@2.1.4...@bleushan/tools@2.1.5) (2019-10-25)
 
 **Note:** Version bump only for package @bleushan/tools
