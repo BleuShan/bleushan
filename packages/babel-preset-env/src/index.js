@@ -27,10 +27,10 @@ export default declare((api, options) => {
   const isTest = api.env() === 'test'
   const plugins = [
     ...setupProposalClassPlugins(decoratorsOptions),
-    '@babel/plugin-proposal-optional-chaining',
-    '@babel/plugin-syntax-import-meta',
-    '@babel/plugin-proposal-export-default-from',
-    '@babel/plugin-proposal-export-namespace-from',
+    require('@babel/plugin-proposal-optional-chaining'),
+    require('@babel/plugin-syntax-import-meta'),
+    require('@babel/plugin-proposal-export-default-from'),
+    require('@babel/plugin-proposal-export-namespace-from'),
     ...importPlugins
   ]
 
@@ -62,7 +62,7 @@ export default declare((api, options) => {
   const presets = [
     ...minifyPreset,
     [
-      '@babel/preset-env',
+      require('@babel/preset-env'),
       {
         useBuiltIns: 'usage',
         corejs: {

@@ -12,23 +12,26 @@ describe('preset', () => {
     const decoratorsPlugins =
       decorators === 'legacy'
         ? [
-            ['@babel/plugin-proposal-decorators', {legacy: true}],
-            ['@babel/plugin-proposal-class-properties', {loose: true}],
-            ['@babel/plugin-proposal-private-methods', {loose: true}]
+            [require('@babel/plugin-proposal-decorators'), {legacy: true}],
+            [require('@babel/plugin-proposal-class-properties'), {loose: true}],
+            [require('@babel/plugin-proposal-private-methods'), {loose: true}]
           ]
         : decorators === false
-        ? ['@babel/plugin-proposal-class-properties', '@babel/plugin-proposal-private-methods']
+        ? [
+            require('@babel/plugin-proposal-class-properties'),
+            require('@babel/plugin-proposal-private-methods')
+          ]
         : [
-            ['@babel/plugin-proposal-decorators', {decoratorsBeforeExport: true}],
-            '@babel/plugin-proposal-class-properties',
-            '@babel/plugin-proposal-private-methods'
+            [require('@babel/plugin-proposal-decorators'), {decoratorsBeforeExport: true}],
+            require('@babel/plugin-proposal-class-properties'),
+            require('@babel/plugin-proposal-private-methods')
           ]
     const plugins = [
       ...decoratorsPlugins,
-      '@babel/plugin-proposal-optional-chaining',
-      '@babel/plugin-syntax-import-meta',
-      '@babel/plugin-proposal-export-default-from',
-      '@babel/plugin-proposal-export-namespace-from',
+      require('@babel/plugin-proposal-optional-chaining'),
+      require('@babel/plugin-syntax-import-meta'),
+      require('@babel/plugin-proposal-export-default-from'),
+      require('@babel/plugin-proposal-export-namespace-from'),
       ...importPlugins
     ]
 
@@ -49,7 +52,7 @@ describe('preset', () => {
     const presets = [
       ...minifyPreset,
       [
-        '@babel/preset-env',
+        require('@babel/preset-env'),
         {
           useBuiltIns: 'usage',
           corejs: {

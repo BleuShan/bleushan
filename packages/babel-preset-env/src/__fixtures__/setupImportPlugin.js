@@ -1,7 +1,7 @@
 /* eslint-disable no-template-curly-in-string */
 export const buildDefaultImportPluginSettings = (esModules) => [
   [
-    'transform-imports',
+    require('babel-plugin-transform-imports'),
     {
       lodash: {
         transform: 'lodash/${member}',
@@ -21,7 +21,7 @@ export const buildDefaultImportPluginSettings = (esModules) => [
 
 export const buildExpectedOptions = (options, esModules) => [
   [
-    'transform-imports',
+    require('babel-plugin-transform-imports'),
     {
       lodash: {
         transform: 'lodash/${member}',
@@ -44,7 +44,7 @@ export const buildExpectedOptionsWithOverrides = (options, esModules) => {
   const {'lodash/fp': lfp = {}, lodash = {}, ramda = {}, ...rest} = options
   return [
     [
-      'transform-imports',
+      require('babel-plugin-transform-imports'),
       {
         lodash: {
           ...{

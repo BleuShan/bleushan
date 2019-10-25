@@ -45,7 +45,7 @@ const mergeWithDefaultOptions = (options, esmodules) => {
 }
 
 const setupImportPlugin = (options, esmodules) => [
-  ['transform-imports', mergeWithDefaultOptions(options, esmodules)]
+  [require('babel-plugin-transform-imports'), mergeWithDefaultOptions(options, esmodules)]
 ]
 
 export default setupImportPlugin

@@ -1,14 +1,17 @@
 const configureClassProperties = (loose) =>
   loose
     ? [
-        ['@babel/plugin-proposal-class-properties', {loose: true}],
-        ['@babel/plugin-proposal-private-methods', {loose: true}]
+        [require('@babel/plugin-proposal-class-properties'), {loose: true}],
+        [require('@babel/plugin-proposal-private-methods'), {loose: true}]
       ]
-    : ['@babel/plugin-proposal-class-properties', '@babel/plugin-proposal-private-methods']
+    : [
+        require('@babel/plugin-proposal-class-properties'),
+        require('@babel/plugin-proposal-private-methods')
+      ]
 
 const configureDecoratorsPlugin = (mode, decoratorsBeforeExport) => [
   [
-    '@babel/plugin-proposal-decorators',
+    require('@babel/plugin-proposal-decorators'),
     mode === 'legacy' ? {legacy: true} : {decoratorsBeforeExport}
   ]
 ]
