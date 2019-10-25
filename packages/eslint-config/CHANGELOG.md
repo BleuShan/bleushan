@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/BleuShan/bleushan/compare/@bleushan/eslint-config@1.3.2...@bleushan/eslint-config@2.0.0) (2019-10-25)
+
+
+### Bug Fixes
+
+* **eslint-config:** rework dependencies ([3dffdcd](https://github.com/BleuShan/bleushan/commit/3dffdcd))
+
+
+### BREAKING CHANGES
+
+* **eslint-config:** add prettier as a peer dependencies
+
+
+
+
+
 ## [1.3.2](https://github.com/BleuShan/bleushan/compare/@bleushan/eslint-config@1.3.1...@bleushan/eslint-config@1.3.2) (2019-09-01)
 
 
