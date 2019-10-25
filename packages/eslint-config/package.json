@@ -16,12 +16,15 @@
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^22.16.0",
+    "eslint-plugin-jest": "^22.20.0",
     "eslint-plugin-node": "^9.2.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "prettier": "^1.18.2"
+    "eslint-plugin-standard": "^4.0.1"
+  },
+  "peerDependencies": {
+    "prettier": "^1.18.2",
+    "jest": "^24.9.0"
   },
   "release": {
     "branch": "master"
