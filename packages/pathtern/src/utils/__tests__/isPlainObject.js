@@ -1,4 +1,3 @@
-import isPlainObject from '../isPlainObject'
 import {
   plainObject,
   createdPlainObject,
@@ -9,19 +8,55 @@ import {
 } from '../../__fixtures__/constants.js'
 
 describe('isPlainObject', () => {
-  describe.each`
-    value                 | expected
-    ${plainObject}        | ${true}
-    ${createdPlainObject} | ${true}
-    ${emptyArray}         | ${false}
-    ${new DummyClass()}   | ${false}
-    ${null}               | ${false}
-    ${undefined}          | ${false}
-    ${arrowFunction}      | ${false}
-    ${neString}           | ${false}
-  `('when called $value', ({value, expected}) => {
-    it(`should return with ${expected}`, () => {
-      expect(isPlainObject(value)).toEqual(expected)
+  beforeEach(() => {
+    jest.resetModules()
+  })
+
+  describe('using Object', () => {
+    let reflect
+    beforeEach(() => {
+      reflect = globalThis.Reflect
+      globalThis.Reflect = undefined
+    })
+
+    afterEach(() => {
+      globalThis.Reflect = reflect
+    })
+
+    describe.each`
+      value                 | expected
+      ${plainObject}        | ${true}
+      ${createdPlainObject} | ${true}
+      ${emptyArray}         | ${false}
+      ${new DummyClass()}   | ${false}
+      ${null}               | ${false}
+      ${undefined}          | ${false}
+      ${arrowFunction}      | ${false}
+      ${neString}           | ${false}
+    `('when called $value', ({value, expected}) => {
+      it(`should return with ${expected}`, async () => {
+        const isPlainObject = await import('../isPlainObject').then((mod) => mod.default)
+        expect(isPlainObject(value)).toEqual(expected)
+      })
+    })
+  })
+
+  describe('using reflect', () => {
+    describe.each`
+      value                 | expected
+      ${plainObject}        | ${true}
+      ${createdPlainObject} | ${true}
+      ${emptyArray}         | ${false}
+      ${new DummyClass()}   | ${false}
+      ${null}               | ${false}
+      ${undefined}          | ${false}
+      ${arrowFunction}      | ${false}
+      ${neString}           | ${false}
+    `('when called $value', ({value, expected}) => {
+      it(`should return with ${expected}`, async () => {
+        const isPlainObject = await import('../isPlainObject').then((mod) => mod.default)
+        expect(isPlainObject(value)).toEqual(expected)
+      })
     })
   })
 })
