@@ -39,6 +39,10 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/__fixtures__/"
+    ],
+    "setupFilesAfterEnv": [
+      "jest-extended",
+      "jest-chain"
     ]
   },
   "release": {
