@@ -1,6 +1,6 @@
 {
   "name": "@bleushan/pathtern",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Routing utilities",
   "keywords": [
     "Router"
@@ -26,8 +26,8 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@bleushan/babel-preset-env": "^3.0.0",
-    "@bleushan/eslint-config": "^2.0.0",
+    "@bleushan/babel-preset-env": "^3.0.1",
+    "@bleushan/eslint-config": "^2.0.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",

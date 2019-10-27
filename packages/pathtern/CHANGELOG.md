@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/BleuShan/bleushan/compare/@bleushan/pathtern@1.0.0...@bleushan/pathtern@1.0.1) (2019-10-27)
+
+
+### Bug Fixes
+
+* rework dependencies and delete tools package ([57073ea](https://github.com/BleuShan/bleushan/commit/57073ea962239006bc68eaf7a0e30cdc40822c4b))
+
+
+
+
+
 # [1.0.0](https://github.com/BleuShan/bleushan/compare/@bleushan/pathtern@0.2.5...@bleushan/pathtern@1.0.0) (2019-10-25)
 
 

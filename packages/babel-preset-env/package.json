@@ -1,6 +1,6 @@
 {
   "name": "@bleushan/babel-preset-env",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A slightly more complicated babel preset env",
   "main": "lib/index.js",
   "module": "src/index.js",
@@ -38,10 +38,11 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@bleushan/eslint-config": "^2.0.0",
+    "@bleushan/eslint-config": "^2.0.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
+    "core-js": "^3.3.4",
     "eslint": "^6.6.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.18.2",
@@ -50,11 +51,10 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "core-js": "^3.3.4",
     "jest": "^24.9.0",
     "prettier": "^1.18.2",
-    "rimraf": "^2.6.2",
-    "regenerator-runtime": "^0.13.3"
+    "regenerator-runtime": "^0.13.3",
+    "rimraf": "^2.6.2"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
