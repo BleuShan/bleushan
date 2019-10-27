@@ -57,7 +57,8 @@ export default declare((api, options) => {
           ...minifyEnvSettings
         }
 
-  const minifyPreset = minifySettings === false ? [] : [['minify', minifySettings]]
+  const minifyPreset =
+    minifySettings === false ? [] : [[require('babel-preset-minify'), minifySettings]]
 
   const presets = [
     ...minifyPreset,

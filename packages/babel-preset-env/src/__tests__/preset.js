@@ -40,7 +40,7 @@ describe('preset', () => {
         ? []
         : [
             [
-              'minify',
+              require('babel-preset-minify'),
               {
                 keepFnName: true,
                 keepClassName: true,
