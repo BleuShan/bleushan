@@ -5,7 +5,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'prettier/standard'
   ],
-  parser: 'babel-eslint',
+  parser: '@bleushan/babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       legacyDecorators: true
