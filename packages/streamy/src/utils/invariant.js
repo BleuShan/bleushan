@@ -1,7 +1,7 @@
 import {typeOf} from './typeOf.js'
 
-export function invariant({condition, message, errorConstructor = Error, args = []} = {}) {
-  if (typeOf(errorConstructor) !== 'function') {
+export function invariant({condition, message, errorType = Error, args = []} = {}) {
+  if (typeOf(errorType) !== 'function') {
     throw new TypeError(`errorContructor is not a function`)
   }
 
@@ -20,6 +20,6 @@ export function invariant({condition, message, errorConstructor = Error, args = 
   }
 
   if (!conditionResult) {
-    throw Reflect.construct(errorConstructor, [message, ...args])
+    throw Reflect.construct(errorType, [message, ...args])
   }
 }

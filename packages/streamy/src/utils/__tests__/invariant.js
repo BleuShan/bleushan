@@ -19,9 +19,9 @@ describe('invariant', () => {
     }).toThrowErrorMatchingSnapshot()
   })
 
-  it('should throw an error when the errorConstructor is a string', () => {
+  it('should throw an error when the errorType is a string', () => {
     expect(() => {
-      invariant({message: 'string', condition: false, errorConstructor: 'stes'})
+      invariant({message: 'string', condition: false, errorType: 'stes'})
     }).toThrowErrorMatchingSnapshot()
   })
 })

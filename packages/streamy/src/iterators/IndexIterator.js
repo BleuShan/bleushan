@@ -9,7 +9,7 @@ export class IndexIterator {
     invariant({
       condition: hasValidArrayLength(source),
       message: 'expected source to have valid length property',
-      errorConstructor: TypeError
+      errorType: TypeError
     })
     this.#source = source
   }
