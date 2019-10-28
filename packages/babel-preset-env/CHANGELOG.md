@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@3.0.1...@bleushan/babel-preset-env@4.0.0) (2019-10-28)
+
+
+### Bug Fixes
+
+* **babel-preset:** fix minify require ([ba4f818](https://github.com/BleuShan/bleushan/commit/ba4f81881113f8e2936ad0cf06ae49e687c4b4cc))
+* **eslint-config:** use our own babel-eslint fork ([24573e6](https://github.com/BleuShan/bleushan/commit/24573e62e489ec7a5a9cbc32d13e4dfb863bcfba))
+
+
+### Features
+
+* add streamy package ([d693da1](https://github.com/BleuShan/bleushan/commit/d693da12c9d00f46e1f0e5f43fc14d5035611013))
+
+
+### BREAKING CHANGES
+
+* **eslint-config:** we now depend on @bleushan/babel-eslint
+
+
+
+
+
 ## [3.0.1](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@3.0.0...@bleushan/babel-preset-env@3.0.1) (2019-10-27)
 
 
