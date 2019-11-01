@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/BleuShan/bleushan/compare/@bleushan/streamy@1.0.0...@bleushan/streamy@1.1.0) (2019-11-01)
+
+
+### Features
+
+* **streamy:** add async support ([91cd8f6](https://github.com/BleuShan/bleushan/commit/91cd8f6ca75e3b39c887a4f2186728b77a750c35))
+
+
+
+
+
 # 1.0.0 (2019-10-28)
 
 
