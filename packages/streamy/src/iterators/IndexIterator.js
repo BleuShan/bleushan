@@ -2,7 +2,7 @@ import {invariant} from '../utils/invariant.js'
 import {hasValidArrayLength} from '../utils/hasValidArrayLength.js'
 
 export class IndexIterator {
-  #index = -1
+  #index = 0
   #source
 
   constructor(source) {
@@ -14,23 +14,19 @@ export class IndexIterator {
     this.#source = source
   }
 
-  get done() {
-    return this.#index > this.#source.length - 1
-  }
-
-  get value() {
-    return this.#source[this.#index]
-  }
-
   [Symbol.iterator]() {
     return this
   }
 
   next() {
-    if (!this.done) {
+    const result = {
+      done: this.#index > this.#source.length - 1
+    }
+    if (!result.done) {
+      result.value = this.#source[this.#index]
       this.#index += 1
     }
 
-    return this
+    return result
   }
 }
