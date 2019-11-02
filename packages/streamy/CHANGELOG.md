@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/BleuShan/bleushan/compare/@bleushan/streamy@1.1.0...@bleushan/streamy@1.2.0) (2019-11-02)
+
+
+### Features
+
+* **streamy:** add a few utils and memo support ([bf8089c](https://github.com/BleuShan/bleushan/commit/bf8089ca3a81095a764d626d443988f6adcdb363))
+
+
+
+
+
 # [1.1.0](https://github.com/BleuShan/bleushan/compare/@bleushan/streamy@1.0.0...@bleushan/streamy@1.1.0) (2019-11-01)
 
 

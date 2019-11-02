@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@4.0.0...@bleushan/babel-preset-env@4.1.0) (2019-11-02)
+
+
+### Features
+
+* add big int support ([54bafbf](https://github.com/BleuShan/bleushan/commit/54bafbf9633fb4240828bed453e2f72a67221f0a))
+
+
+
+
+
 # [4.0.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@3.0.1...@bleushan/babel-preset-env@4.0.0) (2019-10-28)
 
 
