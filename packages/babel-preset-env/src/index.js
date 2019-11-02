@@ -27,6 +27,7 @@ export default declare((api, options) => {
   const isTest = api.env() === 'test'
   const plugins = [
     ...setupProposalClassPlugins(decoratorsOptions),
+    require('@babel/plugin-syntax-bigint'),
     require('@babel/plugin-proposal-optional-chaining'),
     require('@babel/plugin-syntax-import-meta'),
     require('@babel/plugin-proposal-export-default-from'),

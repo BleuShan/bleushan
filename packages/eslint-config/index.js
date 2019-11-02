@@ -18,7 +18,10 @@ module.exports = {
     worker: true
   },
   globals: {
-    globalThis: false
+    BigInt: true,
+    globalThis: true,
+    BigInt64Array: true,
+    BigUint64Array: true
   },
   rules: {
     'no-console': ['error', {allow: ['error', 'warn']}],
