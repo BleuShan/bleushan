@@ -1,5 +1,5 @@
 import {invariant} from '../utils/invariant.js'
-import {hasValidArrayLength} from '../utils/hasValidArrayLength.js'
+import {isValidArrayLike} from '../utils/isValidArrayLike.js'
 
 export class IndexIterator {
   #index = 0
@@ -7,8 +7,8 @@ export class IndexIterator {
 
   constructor(source) {
     invariant({
-      condition: hasValidArrayLength(source),
-      message: 'expected source to have valid length property',
+      condition: isValidArrayLike(source),
+      message: 'expected source have a valid ArrayLike object',
       errorType: TypeError
     })
     this.#source = source

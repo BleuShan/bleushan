@@ -1,5 +1,5 @@
 import {typeOf} from './typeOf.js'
 
-export function isNumber(value) {
+export function isNumeric(value) {
   return typeOf(value) === 'number' || typeOf(value) === 'bigint'
 }

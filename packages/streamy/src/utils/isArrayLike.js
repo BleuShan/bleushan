@@ -1,5 +1,5 @@
 import {isString} from './isString.js'
-import {hasValidArrayLength} from './hasValidArrayLength.js'
+import {hasValidArrayLength} from './internal/hasValidArrayLength.js'
 import {isArray} from './isArray.js'
 import {typeOf} from './typeOf.js'
 

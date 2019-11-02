@@ -7,32 +7,18 @@ import {IndexIterator} from './iterators/IndexIterator.js'
 /* eslint-enable no-unused-vars */
 
 export class Stream {
-  #completed = false
+  #currentMemoizeResultId = -1
+  #hasCompleted = false
   #isAsync
-  #memoizedResults = []
-  #processResult = ({value, done}) => {
-    this.#completed = done && value == null
-
-    if (!this.#completed) {
-      this.#memoizedResults.push(value)
-    } else {
-      this.#sourceIterator = null
-    }
-
-    return {
-      value,
-      done: this.#completed
-    }
-  }
-
+  #memoizedResults = new Map()
   #source
   #sourceIterator
 
   // eslint-disable-next-line no-undef
   get #iterator() {
     if (this.#sourceIterator == null) {
-      if (this.#completed) {
-        this.#sourceIterator = new IndexIterator(this.#memoizedResults)
+      if (this.#hasCompleted) {
+        this.#sourceIterator = this.#memoizedResults.values()
       } else if (this.isAsync) {
         this.#sourceIterator = this.#source[Symbol.asyncIterator]()
       } else if (typeOf(this.#source[Symbol.iterator]) === 'function') {
@@ -47,6 +33,10 @@ export class Stream {
 
   get isAsync() {
     return this.#isAsync
+  }
+
+  get hasCompleted() {
+    return this.#hasCompleted
   }
 
   constructor(source) {
@@ -66,7 +56,7 @@ export class Stream {
 
   [Symbol.iterator]() {
     invariant({
-      condition: !this.isAsync || this.#completed,
+      condition: !this.isAsync || this.#hasCompleted,
       message: 'Cannot iterate synchronously over an uncompleted asynchronous stream',
       errorType: TypeError
     })
@@ -74,16 +64,63 @@ export class Stream {
     return this
   }
 
-  next(input) {
-    const promiseOrResult = this.#iterator.next(input)
-    if (!this.#completed) {
-      if (typeOf(promiseOrResult.then) === 'function') {
-        return promiseOrResult.then(this.#processResult)
-      } else {
-        return this.#processResult(promiseOrResult)
+  next(...input) {
+    let promiseOrResult
+    if (input.length) {
+      promiseOrResult = this.#memoizedResultFor(...input)
+    }
+
+    if (promiseOrResult == null) {
+      promiseOrResult = this.#iterator.next(...input)
+
+      if (!this.#hasCompleted) {
+        if (typeOf(promiseOrResult.then) === 'function') {
+          return promiseOrResult.then((result) => this.#memoize(result, ...input))
+        } else {
+          return this.#memoize(promiseOrResult, ...input)
+        }
       }
     }
 
     return promiseOrResult
+  }
+
+  // eslint-disable-next-line no-undef
+  #memoize({value, done}, ...input) {
+    this.#hasCompleted = done && value === undefined
+
+    if (!this.#hasCompleted) {
+      this.#memoizedResults.set(this.#memoizedResultKeyFrom(...input), value)
+    } else {
+      this.#sourceIterator = null
+    }
+
+    return {
+      value,
+      done: this.#hasCompleted
+    }
+  }
+
+  // eslint-disable-next-line no-undef
+  #memoizedResultFor(...input) {
+    const key = this.#memoizedResultKeyFor(input)
+    if (this.#memoizedResults.has(key)) {
+      const value = this.#memoizedResults.get(key)
+
+      return {
+        value,
+        done: false
+      }
+    }
+  }
+
+  // eslint-disable-next-line no-undef
+  #memoizedResultKeyFor(input) {
+    return JSON.stringify(input, (key, value) => (value === undefined ? 'undefined' : value))
+  }
+
+  // eslint-disable-next-line no-undef
+  #memoizedResultKeyFrom(...input) {
+    return input.length ? this.#memoizedResultKeyFor(input) : ++this.#currentMemoizeResultId
   }
 }

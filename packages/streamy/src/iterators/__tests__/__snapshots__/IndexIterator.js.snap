@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IndexIterator constructor when called on a NaN should throw the appropriate error 1`] = `"expected source to have valid length property"`;
+exports[`IndexIterator constructor when called on a NaN should throw the appropriate error 1`] = `"expected source have a valid ArrayLike object"`;
 
-exports[`IndexIterator constructor when called on a null should throw the appropriate error 1`] = `"expected source to have valid length property"`;
+exports[`IndexIterator constructor when called on a null should throw the appropriate error 1`] = `"expected source have a valid ArrayLike object"`;
 
-exports[`IndexIterator constructor when called on a number should throw the appropriate error 1`] = `"expected source to have valid length property"`;
+exports[`IndexIterator constructor when called on a number should throw the appropriate error 1`] = `"expected source have a valid ArrayLike object"`;
 
-exports[`IndexIterator constructor when called on a undefined should throw the appropriate error 1`] = `"expected source to have valid length property"`;
+exports[`IndexIterator constructor when called on a undefined should throw the appropriate error 1`] = `"expected source have a valid ArrayLike object"`;
 
-exports[`IndexIterator constructor when called on an invalid arrayLike object should throw the appropriate error 1`] = `"expected source to have valid length property"`;
+exports[`IndexIterator constructor when called on an invalid arrayLike object should throw the appropriate error 1`] = `"expected source have a valid ArrayLike object"`;
 
-exports[`IndexIterator constructor when called on an object should throw the appropriate error 1`] = `"expected source to have valid length property"`;
+exports[`IndexIterator constructor when called on an object should throw the appropriate error 1`] = `"expected source have a valid ArrayLike object"`;

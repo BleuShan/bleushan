@@ -1,6 +1,6 @@
 import {from} from '../from.js'
 import {Stream} from '../../Stream.js'
-import {asyncGenerator, AsyncIterable, generator} from '../__fixtures__/from.js'
+import {asyncGenerator, AsyncIterable, generator, EchoIterable} from '../__fixtures__/from.js'
 import {typeTag} from '../../utils/typeTag.js'
 
 describe('from operator', () => {
@@ -69,46 +69,105 @@ describe('from operator', () => {
     }
   })
 
-  describe('when it returns an async stream', () => {
+  describe('when called on async iterable', () => {
     let stream
-    const iter = new AsyncIterable()
-    let result
+    const source = new AsyncIterable()
 
-    const iterate = () => {
-      for (const value of stream) {
-        if (result == null) {
-          result = []
-        }
+    async function iterateAsync() {
+      const result = []
+      for await (const value of stream) {
         result.push(value)
+      }
+      return result
+    }
+
+    function iterateSync(result) {
+      return function iterate() {
+        for (const value of stream) {
+          result.push(value)
+        }
+        return result
       }
     }
 
     beforeEach(() => {
-      stream = from(iter)
+      stream = from(source)
     })
 
     afterEach(() => {
-      result = null
       jest.restoreAllMocks()
-      iter.reset()
+      source.reset()
     })
 
     it('should not allow synchronous calls if has not completed yet', () => {
-      expect(iterate).toThrowErrorMatchingSnapshot()
-      expect(result).toBeNil()
+      const result = []
+      expect(iterateSync(result)).toThrowErrorMatchingSnapshot()
     })
 
     it('should allow synchronous calls if has completed', async () => {
-      const expected = []
-      for await (const value of stream) {
-        expected.push(value)
+      const expected = await iterateAsync()
+      const result = []
+
+      jest.spyOn(source, 'next')
+      expect(stream.hasCompleted).toEqual(true)
+
+      expect(iterateSync(result)).not.toThrow()
+      expect(source.next).not.toHaveBeenCalled()
+      expect(result).toEqual(expected)
+    })
+
+    it('should allow asynchronous calls if has completed', async () => {
+      const expected = await iterateAsync()
+
+      jest.spyOn(source, 'next')
+      expect(stream.hasCompleted).toEqual(true)
+      const result = await iterateAsync()
+
+      expect(source.next).not.toHaveBeenCalled()
+      expect(result).toEqual(expected)
+    })
+  })
+
+  describe('when called on an iterable that takes an input', () => {
+    let stream
+    const source = new EchoIterable()
+
+    function send(values) {
+      const result = []
+      for (const value of values) {
+        result.push(stream.next(value))
       }
 
-      jest.spyOn(iter, 'next')
+      return result
+    }
 
-      expect(iterate).not.toThrow()
-      expect(iter.next).not.toHaveBeenCalled()
-      expect(result).toEqual(expected)
+    beforeEach(() => {
+      stream = from(source)
+      jest.spyOn(source, 'next')
+    })
+
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
+
+    describe('when it has memoized the result', () => {
+      describe.each([
+        [[1, 2, 3]],
+        [[{result: 's'}, {test: 2}, undefined]],
+        [['string', 'stri', 'hello']],
+        [[null, undefined, 0]]
+      ])('when it was sent the following: %p', (values) => {
+        let expected
+        beforeEach(() => {
+          expected = send(values)
+        })
+
+        it('should not call into the source', () => {
+          const result = send(values)
+          expect(result).toEqual(expected)
+          expect(source.next).toHaveBeenCalledTimes(values.length)
+        })
+      })
     })
   })
 })

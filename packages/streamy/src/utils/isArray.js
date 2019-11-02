@@ -1,5 +1,5 @@
 import {typeTag} from './typeTag.js'
-import {hasValidArrayLength} from './hasValidArrayLength.js'
+import {hasValidArrayLength} from './internal/hasValidArrayLength.js'
 
 export const isArray =
   Array.isArray ||
