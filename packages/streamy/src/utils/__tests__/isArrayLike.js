@@ -23,7 +23,8 @@ describe('isArrayLike', () => {
     [{test: 's'}, false],
     [null, false],
     [undefined, false],
-    [NaN, false]
+    [NaN, false],
+    [(a) => a, false]
   ])('when called on %p should return %p', (value, expected) => {
     expect(isArrayLike(value)).toEqual(expected)
   })

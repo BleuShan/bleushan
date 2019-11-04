@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`of when called on NaN should throw 1`] = `"source must be a string, an ArrayLike object or an iterable"`;
+
+exports[`of when called on async iterable should not allow synchronous calls if has not completed yet 1`] = `"Cannot iterate synchronously over an uncompleted asynchronous stream"`;
+
+exports[`of when called on false should throw 1`] = `"source must be a string, an ArrayLike object or an iterable"`;
+
+exports[`of when called on null should throw 1`] = `"source must be a string, an ArrayLike object or an iterable"`;
+
+exports[`of when called on undefined should throw 1`] = `"source must be a string, an ArrayLike object or an iterable"`;

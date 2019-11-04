@@ -1,9 +1,9 @@
-import {from} from '../from.js'
+import {asyncGenerator, AsyncIterable, generator} from '../__fixtures__/of.js'
+import {of} from '../of.js'
 import {Stream} from '../../Stream.js'
-import {asyncGenerator, AsyncIterable, generator, EchoIterable} from '../__fixtures__/from.js'
 import {typeTag} from '../../utils/typeTag.js'
 
-describe('from operator', () => {
+describe('of', () => {
   describe.each([
     [[1, 2, 3], true],
     [{0: 1, length: 1}, true],
@@ -12,6 +12,7 @@ describe('from operator', () => {
     [generator, true],
     [asyncGenerator, true],
     [new AsyncIterable(), true],
+    [of([1, 2, 3]), true],
     [({test: 's'}, false)],
     [null, false],
     [undefined, false],
@@ -35,7 +36,7 @@ describe('from operator', () => {
         }
       }
 
-      call = () => (isGenerator ? from(source()) : from(source))
+      call = () => (isGenerator ? of(source()) : of(source))
     })
 
     if (valid) {
@@ -62,6 +63,14 @@ describe('from operator', () => {
 
         expect(result).toEqual(expectedResult)
       })
+
+      if (source instanceof Stream) {
+        it('should be a return the source directly when it is a Stream', () => {
+          const source = of(1, 2, 3)
+          const derived = of(source)
+          expect(derived).toBe(source)
+        })
+      }
     } else {
       it('should throw', () => {
         expect(call).toThrowErrorMatchingSnapshot()
@@ -69,7 +78,8 @@ describe('from operator', () => {
     }
   })
 
-  describe('when called on async iterable', () => {
+  // eslint-disable-next-line jest/no-disabled-tests
+  describe.skip('when called on async iterable', () => {
     let stream
     const source = new AsyncIterable()
 
@@ -91,7 +101,7 @@ describe('from operator', () => {
     }
 
     beforeEach(() => {
-      stream = from(source)
+      stream = of(source)
     })
 
     afterEach(() => {
@@ -104,70 +114,27 @@ describe('from operator', () => {
       expect(iterateSync(result)).toThrowErrorMatchingSnapshot()
     })
 
-    it('should allow synchronous calls if has completed', async () => {
+    it('should not allow synchronous calls if has completed', async () => {
       const expected = await iterateAsync()
       const result = []
 
       jest.spyOn(source, 'next')
-      expect(stream.hasCompleted).toEqual(true)
+      expect(stream.completed).toEqual(true)
 
-      expect(iterateSync(result)).not.toThrow()
+      expect(iterateSync(result)).toThrowErrorMatchingSnapshot()
       expect(source.next).not.toHaveBeenCalled()
-      expect(result).toEqual(expected)
+      expect(result).not.toEqual(expected)
     })
 
     it('should allow asynchronous calls if has completed', async () => {
       const expected = await iterateAsync()
 
       jest.spyOn(source, 'next')
-      expect(stream.hasCompleted).toEqual(true)
+      expect(stream.completed).toEqual(true)
       const result = await iterateAsync()
 
       expect(source.next).not.toHaveBeenCalled()
       expect(result).toEqual(expected)
-    })
-  })
-
-  describe('when called on an iterable that takes an input', () => {
-    let stream
-    const source = new EchoIterable()
-
-    function send(values) {
-      const result = []
-      for (const value of values) {
-        result.push(stream.next(value))
-      }
-
-      return result
-    }
-
-    beforeEach(() => {
-      stream = from(source)
-      jest.spyOn(source, 'next')
-    })
-
-    afterEach(() => {
-      jest.restoreAllMocks()
-    })
-
-    describe('when it has memoized the result', () => {
-      describe.each([
-        [[1, 2, 3]],
-        [[{result: 's'}, {test: 2}, undefined]],
-        [['string', 'stri', 'hello']],
-        [[null, undefined, 0]]
-      ])('when it was sent the following: %p', (values) => {
-        let expected
-        beforeEach(() => {
-          expected = send(values)
-        })
-
-        it('should not call into the source', () => {
-          const result = send(values)
-          expect(result).toEqual(expected)
-          expect(source.next).toHaveBeenCalledTimes(values.length)
-        })
-      })
     })
   })
 })

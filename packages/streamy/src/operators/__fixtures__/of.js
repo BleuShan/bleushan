@@ -39,20 +39,3 @@ export class AsyncIterable {
     this.#count = 0
   }
 }
-
-export class EchoIterable {
-  [Symbol.iterator]() {
-    return this
-  }
-
-  next(...value) {
-    return !value.length
-      ? {
-          done: true
-        }
-      : {
-          value,
-          done: false
-        }
-  }
-}

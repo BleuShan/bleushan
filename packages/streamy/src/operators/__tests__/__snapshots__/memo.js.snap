@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`memo when called on async iterable should not allow synchronous calls if has not completed yet 1`] = `"Cannot traverse an asynchronous stream synchronously"`;

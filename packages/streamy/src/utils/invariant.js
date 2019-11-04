@@ -1,7 +1,8 @@
+import {isFunction} from './isFunction.js'
 import {typeOf} from './typeOf.js'
 
 export function invariant({condition, message, errorType = Error, args = []} = {}) {
-  if (typeOf(errorType) !== 'function') {
+  if (!isFunction(errorType)) {
     throw new TypeError(`errorContructor is not a function`)
   }
 
@@ -10,7 +11,7 @@ export function invariant({condition, message, errorType = Error, args = []} = {
     throw new TypeError(`expected message to be a string, received: ${message}`)
   }
 
-  const conditionResult = typeOf(condition) === 'function' ? condition() : condition
+  const conditionResult = isFunction(condition) ? condition() : condition
 
   const condType = typeOf(conditionResult)
   if (condType !== 'boolean') {

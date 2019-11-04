@@ -1,53 +1,65 @@
 import {invariant} from './utils/invariant.js'
+import {instanceOf} from './utils/instanceOf.js'
 import {isArrayLike} from './utils/isArrayLike.js'
 import {isString} from './utils/isString.js'
-/* eslint-disable no-unused-vars */
-import {typeOf} from './utils/typeOf.js'
+import {isFunction} from './utils/isFunction.js'
 import {IndexIterator} from './iterators/IndexIterator.js'
-/* eslint-enable no-unused-vars */
+import {AsyncStreamIterator} from './iterators/AsyncStreamIterator.js'
+import {StreamIterator} from './iterators/StreamIterator.js'
+
+function iteratorFor(source, onComplete) {
+  invariant({
+    condition: isArrayLike(source) || isString(source),
+    message: 'source must be a string, an ArrayLike object or an iterable',
+    errorType: TypeError
+  })
+
+  if (isFunction(source[Symbol.asyncIterator])) {
+    return new AsyncStreamIterator(source, onComplete)
+  }
+
+  if (isFunction(source[Symbol.iterator])) {
+    return new StreamIterator(source, onComplete)
+  }
+
+  return new IndexIterator(source, onComplete)
+}
 
 export class Stream {
-  #currentMemoizeResultId = -1
-  #hasCompleted = false
-  #isAsync
-  #memoizedResults = new Map()
-  #source
-  #sourceIterator
+  #completed
+  #iterator
 
-  // eslint-disable-next-line no-undef
-  get #iterator() {
-    if (this.#sourceIterator == null) {
-      if (this.#hasCompleted) {
-        this.#sourceIterator = this.#memoizedResults.values()
-      } else if (this.isAsync) {
-        this.#sourceIterator = this.#source[Symbol.asyncIterator]()
-      } else if (typeOf(this.#source[Symbol.iterator]) === 'function') {
-        this.#sourceIterator = this.#source[Symbol.iterator]()
-      } else {
-        this.#sourceIterator = new IndexIterator(this.#source)
-      }
-    }
+  #onComplete = () => {
+    this.#completed = true
+  }
 
-    return this.#sourceIterator
+  get completed() {
+    return this.#completed
   }
 
   get isAsync() {
-    return this.#isAsync
+    return instanceOf(AsyncStreamIterator, this.#iterator)
   }
 
-  get hasCompleted() {
-    return this.#hasCompleted
-  }
+  constructor(...sources) {
+    let iterator
+    switch (sources.length) {
+      case 0: {
+        this.#completed = true
+        break
+      }
+      case 1: {
+        const [source] = sources
+        iterator = iteratorFor(source, this.#onComplete)
+        break
+      }
+      default: {
+        iterator = iteratorFor(sources, this.#onComplete)
+        break
+      }
+    }
 
-  constructor(source) {
-    invariant({
-      condition: isArrayLike(source) || isString(source),
-      message: 'source must be a string, an ArrayLike object or an iterable',
-      errorType: TypeError
-    })
-
-    this.#source = source
-    this.#isAsync = typeOf(this.#source[Symbol.asyncIterator]) === 'function'
+    this.#iterator = iterator
   }
 
   [Symbol.asyncIterator]() {
@@ -56,71 +68,21 @@ export class Stream {
 
   [Symbol.iterator]() {
     invariant({
-      condition: !this.isAsync || this.#hasCompleted,
-      message: 'Cannot iterate synchronously over an uncompleted asynchronous stream',
-      errorType: TypeError
+      condition: !this.isAsync,
+      message: 'Cannot traverse an asynchronous stream synchronously'
     })
-
     return this
   }
 
-  next(...input) {
-    let promiseOrResult
-    if (input.length) {
-      promiseOrResult = this.#memoizedResultFor(...input)
-    }
-
-    if (promiseOrResult == null) {
-      promiseOrResult = this.#iterator.next(...input)
-
-      if (!this.#hasCompleted) {
-        if (typeOf(promiseOrResult.then) === 'function') {
-          return promiseOrResult.then((result) => this.#memoize(result, ...input))
-        } else {
-          return this.#memoize(promiseOrResult, ...input)
-        }
-      }
-    }
-
-    return promiseOrResult
-  }
-
-  // eslint-disable-next-line no-undef
-  #memoize({value, done}, ...input) {
-    this.#hasCompleted = done && value === undefined
-
-    if (!this.#hasCompleted) {
-      this.#memoizedResults.set(this.#memoizedResultKeyFrom(...input), value)
-    } else {
-      this.#sourceIterator = null
-    }
-
-    return {
-      value,
-      done: this.#hasCompleted
-    }
-  }
-
-  // eslint-disable-next-line no-undef
-  #memoizedResultFor(...input) {
-    const key = this.#memoizedResultKeyFor(input)
-    if (this.#memoizedResults.has(key)) {
-      const value = this.#memoizedResults.get(key)
-
+  next(...args) {
+    if (this.completed) {
       return {
-        value,
-        done: false
+        done: true
       }
     }
-  }
 
-  // eslint-disable-next-line no-undef
-  #memoizedResultKeyFor(input) {
-    return JSON.stringify(input, (key, value) => (value === undefined ? 'undefined' : value))
-  }
-
-  // eslint-disable-next-line no-undef
-  #memoizedResultKeyFrom(...input) {
-    return input.length ? this.#memoizedResultKeyFor(input) : ++this.#currentMemoizeResultId
+    if (!this.#completed) {
+      return this.#iterator.next(...args)
+    }
   }
 }
