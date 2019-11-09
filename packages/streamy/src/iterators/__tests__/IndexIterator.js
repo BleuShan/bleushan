@@ -33,6 +33,7 @@ describe('IndexIterator', () => {
     })
 
     it('should not have called the callback while traversing', () => {
+      // eslint-disable-next-line no-unused-vars
       for (const _ of iterator) {
         expect(callback).not.toHaveBeenCalled()
       }

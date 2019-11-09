@@ -1,27 +1,17 @@
-import {invariant} from '../invariant.js'
+import {invariantWhenInvokedWith} from '../__fixtures__/invariant.js'
 
 describe('invariant', () => {
-  it('should throw an when message is invalid', () => {
-    expect(() => {
-      invariant({message: 1})
-    }).toThrowErrorMatchingSnapshot()
-  })
-
-  it('should throw an when conditon is a function that returns a string', () => {
-    expect(() => {
-      invariant({message: 'string', condition: () => 'ste'})
-    }).toThrowErrorMatchingSnapshot()
-  })
-
-  it('should throw an error when conditon is a string', () => {
-    expect(() => {
-      invariant({message: 'string', condition: ''})
-    }).toThrowErrorMatchingSnapshot()
-  })
-
-  it('should throw an error when the errorType is a string', () => {
-    expect(() => {
-      invariant({message: 'string', condition: false, errorType: 'stes'})
-    }).toThrowErrorMatchingSnapshot()
+  describe('when invoked', () => {
+    describe.each([
+      [{message: 1}],
+      [{message: 'string', condition: () => 'ste'}],
+      [{message: 'string', condition: ''}],
+      [{message: 'string', condition: false, errorType: 'stes'}],
+      [{message: 'string', condition: true, errorType: 'stes'}]
+    ])('with an invalid configuration, like %o,', (configuration) => {
+      it('should throw with the appropriate error', () => {
+        expect(invariantWhenInvokedWith(configuration)).toThrowErrorMatchingSnapshot()
+      })
+    })
   })
 })

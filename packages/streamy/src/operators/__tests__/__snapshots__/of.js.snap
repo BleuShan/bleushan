@@ -1,21 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the "of" operator when invoked with a single invalid value, like "{ test: 's' }", should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
+exports[`the "of" operator when invoked with a single invalid value, like { test: 's' }, should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
 
-exports[`the "of" operator when invoked with a single invalid value, like "1", should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
+exports[`the "of" operator when invoked with a single invalid value, like 1, should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
 
-exports[`the "of" operator when invoked with a single invalid value, like "1n", should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
+exports[`the "of" operator when invoked with a single invalid value, like 1n, should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
 
-exports[`the "of" operator when invoked with a single invalid value, like "NaN", should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
+exports[`the "of" operator when invoked with a single invalid value, like NaN, should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
 
-exports[`the "of" operator when invoked with a single invalid value, like "null", should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
+exports[`the "of" operator when invoked with a single invalid value, like null, should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
 
-exports[`the "of" operator when invoked with a single invalid value, like "undefined", should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
+exports[`the "of" operator when invoked with a single invalid value, like undefined, should throw the appropriate error 1`] = `"source must be a string, an iterable, an ArrayLike or PromiseLike object"`;
 
-exports[`the "of" operator when invoked with a single valid value, like "AsyncIterable {}", should not allow synchronous traversal if the stream is completed 1`] = `"Cannot traverse an asynchronous stream synchronously"`;
+exports[`the "of" operator when invoked with a single valid value, like [AsyncGeneratorFunction: asyncGenerator] {
+  [length]: 0,
+  [name]: 'asyncGenerator',
+  [prototype]: Object [AsyncGenerator] {}
+}, from which the result should not allow synchronous traversal if the stream is completed 1`] = `"Cannot traverse an asynchronous stream synchronously"`;
 
-exports[`the "of" operator when invoked with a single valid value, like "AsyncIterable {}", should not allow synchronous traversal if the stream is not completed 1`] = `"Cannot traverse an asynchronous stream synchronously"`;
+exports[`the "of" operator when invoked with a single valid value, like [AsyncGeneratorFunction: asyncGenerator] {
+  [length]: 0,
+  [name]: 'asyncGenerator',
+  [prototype]: Object [AsyncGenerator] {}
+}, from which the result should not allow synchronous traversal if the stream is not completed 1`] = `"Cannot traverse an asynchronous stream synchronously"`;
 
-exports[`the "of" operator when invoked with a single valid value, like "Promise { 1 }", should not allow synchronous traversal if the stream is completed 1`] = `"Cannot traverse an asynchronous stream synchronously"`;
+exports[`the "of" operator when invoked with a single valid value, like AsyncIterable {}, from which the result should not allow synchronous traversal if the stream is completed 1`] = `"Cannot traverse an asynchronous stream synchronously"`;
 
-exports[`the "of" operator when invoked with a single valid value, like "Promise { 1 }", should not allow synchronous traversal if the stream is not completed 1`] = `"Cannot traverse an asynchronous stream synchronously"`;
+exports[`the "of" operator when invoked with a single valid value, like AsyncIterable {}, from which the result should not allow synchronous traversal if the stream is not completed 1`] = `"Cannot traverse an asynchronous stream synchronously"`;
+
+exports[`the "of" operator when invoked with a single valid value, like Promise { 1 }, from which the result should not allow synchronous traversal if the stream is completed 1`] = `"Cannot traverse an asynchronous stream synchronously"`;
+
+exports[`the "of" operator when invoked with a single valid value, like Promise { 1 }, from which the result should not allow synchronous traversal if the stream is not completed 1`] = `"Cannot traverse an asynchronous stream synchronously"`;

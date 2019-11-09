@@ -81,8 +81,6 @@ export class Stream {
       }
     }
 
-    if (!this.#completed) {
-      return this.#iterator.next(...args)
-    }
+    return this.#iterator.next(...args)
   }
 }

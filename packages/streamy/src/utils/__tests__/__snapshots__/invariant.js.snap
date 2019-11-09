@@ -1,9 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`invariant should throw an error when conditon is a string 1`] = `"expected condition be able to be evaluated to a boolean, received: "`;
+exports[`invariant when invoked with an invalid configuration, like {
+  message: 'string',
+  condition: [Function: condition] { [length]: 0, [name]: 'condition' }
+}, should throw with the appropriate error 1`] = `"expected condition be able to be evaluated to a boolean, received: ste"`;
 
-exports[`invariant should throw an error when the errorType is a string 1`] = `"errorContructor is not a function"`;
+exports[`invariant when invoked with an invalid configuration, like { message: 'string', condition: '' }, should throw with the appropriate error 1`] = `"expected condition be able to be evaluated to a boolean, received: "`;
 
-exports[`invariant should throw an when conditon is a function that returns a string 1`] = `"expected condition be able to be evaluated to a boolean, received: ste"`;
+exports[`invariant when invoked with an invalid configuration, like { message: 'string', condition: false, errorType: 'stes' }, should throw with the appropriate error 1`] = `"errorContructor is not a function"`;
 
-exports[`invariant should throw an when message is invalid 1`] = `"expected message to be a string, received: 1"`;
+exports[`invariant when invoked with an invalid configuration, like { message: 'string', condition: true, errorType: 'stes' }, should throw with the appropriate error 1`] = `"errorContructor is not a function"`;
+
+exports[`invariant when invoked with an invalid configuration, like { message: 1 }, should throw with the appropriate error 1`] = `"expected message to be a string, received: 1"`;

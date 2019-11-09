@@ -1,32 +1,30 @@
+import {toArray, toArrayAsync} from '../__fixtures__/common.js'
 import {empty} from '../empty.js'
 import {Stream} from '../../Stream.js'
 
-describe('empty', () => {
+describe('the result of the "empty" operator', () => {
   let stream
 
   beforeEach(() => {
     stream = empty()
   })
 
-  it('should return a stream', () => {
+  it('should be an instance Stream', () => {
     expect(stream).toBeInstanceOf(Stream)
   })
 
-  it('should yield no values when traversed synchronously', () => {
-    const result = []
-    for (const value of stream) {
-      result.push(value)
-    }
+  describe.each`
+    mode                 | traversal
+    ${'a synchronous'}   | ${toArray}
+    ${'an asynchronous'} | ${toArrayAsync}
+  `('when using $mode traversal', ({traversal}) => {
+    it('should yield no values', async () => {
+      let result = traversal(stream)
+      if (result.then) {
+        result = await result
+      }
 
-    expect(result).toBeEmpty()
-  })
-
-  it('should yield no values when traversed asynchronously', async () => {
-    const result = []
-    for await (const value of stream) {
-      result.push(value)
-    }
-
-    expect(result).toBeEmpty()
+      expect(result).toBeEmpty()
+    })
   })
 })
