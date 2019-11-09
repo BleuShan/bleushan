@@ -25,7 +25,7 @@ export class AsyncStreamIterator {
       this.#onComplete()
       return {
         value,
-        done: true
+        done: false
       }
     }
 

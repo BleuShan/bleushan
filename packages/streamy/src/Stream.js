@@ -9,12 +9,12 @@ import {StreamIterator} from './iterators/StreamIterator.js'
 
 function iteratorFor(source, onComplete) {
   invariant({
-    condition: isArrayLike(source) || isString(source),
-    message: 'source must be a string, an ArrayLike object or an iterable',
+    condition: isArrayLike(source) || isString(source) || isFunction(source?.then),
+    message: 'source must be a string, an iterable, an ArrayLike or PromiseLike object',
     errorType: TypeError
   })
 
-  if (isFunction(source[Symbol.asyncIterator])) {
+  if (isFunction(source.then) || isFunction(source[Symbol.asyncIterator])) {
     return new AsyncStreamIterator(source, onComplete)
   }
 

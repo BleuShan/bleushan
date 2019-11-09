@@ -3,9 +3,11 @@ import {Stream} from '../../Stream.js'
 
 describe('empty', () => {
   let stream
+
   beforeEach(() => {
     stream = empty()
   })
+
   it('should return a stream', () => {
     expect(stream).toBeInstanceOf(Stream)
   })

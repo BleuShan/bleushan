@@ -39,3 +39,19 @@ export class AsyncIterable {
     this.#count = 0
   }
 }
+
+export async function iterateAsync(iterable) {
+  const result = []
+  for await (const value of iterable) {
+    result.push(value)
+  }
+  return result
+}
+
+export function iterateSync(iterable) {
+  const result = []
+  for (const value of iterable) {
+    result.push(value)
+  }
+  return result
+}
