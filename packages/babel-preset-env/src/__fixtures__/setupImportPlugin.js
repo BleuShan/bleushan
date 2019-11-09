@@ -19,7 +19,7 @@ export const buildDefaultImportPluginSettings = (esModules) => [
   ]
 ]
 
-export const buildExpectedOptions = (options, esModules) => [
+export const buildExpectedOptions = (esModules, options) => [
   [
     require('babel-plugin-transform-imports'),
     {
@@ -40,7 +40,7 @@ export const buildExpectedOptions = (options, esModules) => [
   ]
 ]
 
-export const buildExpectedOptionsWithOverrides = (options, esModules) => {
+export const buildExpectedOptionsWithOverrides = (esModules, options) => {
   const {'lodash/fp': lfp = {}, lodash = {}, ramda = {}, ...rest} = options
   return [
     [
