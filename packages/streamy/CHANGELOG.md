@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/BleuShan/bleushan/compare/@bleushan/streamy@1.2.1...@bleushan/streamy@1.3.0) (2019-11-09)
+
+
+### Features
+
+* **babel-preset:** add nullish coalescing and bump deps ([113c295](https://github.com/BleuShan/bleushan/commit/113c295b7b589aa4c96324185a8adc8bf161679f))
+
+
+
+
+
 ## [1.2.1](https://github.com/BleuShan/bleushan/compare/@bleushan/streamy@1.2.0...@bleushan/streamy@1.2.1) (2019-11-04)
 
 **Note:** Version bump only for package @bleushan/streamy
