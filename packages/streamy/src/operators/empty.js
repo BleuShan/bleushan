@@ -1,5 +1,5 @@
-import {Stream} from '../Stream'
+import Stream from '../Stream'
 
-export function empty() {
+export default function empty() {
   return new Stream()
 }

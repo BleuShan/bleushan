@@ -26,6 +26,9 @@
     "lint": "eslint --fix src",
     "test": "jest"
   },
+  "dependencies": {
+    "@bleushan/utils": "^0.1.0"
+  },
   "devDependencies": {
     "@bleushan/babel-eslint": "^10.0.4",
     "@bleushan/babel-preset-env": "^4.2.0",

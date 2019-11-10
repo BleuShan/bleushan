@@ -1,4 +1,4 @@
-import {IndexIterator} from '../IndexIterator.js'
+import IndexIterator from '../IndexIterator.js'
 
 describe('IndexIterator', () => {
   describe.each`

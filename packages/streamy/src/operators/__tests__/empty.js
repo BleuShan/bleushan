@@ -1,6 +1,6 @@
 import {toArray, toArrayAsync} from '../__fixtures__/common.js'
-import {empty} from '../empty.js'
-import {Stream} from '../../Stream.js'
+import empty from '../empty.js'
+import Stream from '../../Stream.js'
 
 describe('the result of the "empty" operator', () => {
   let stream

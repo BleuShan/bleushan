@@ -14,6 +14,10 @@ export const buildDefaultImportPluginSettings = (esModules) => [
       ramda: {
         transform: esModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
         preventFullImport: true
+      },
+      '@bleushan/utils': {
+        transform: esModules ? '@bleushan/utils/src/${member}' : '@bleushan/utils/lib/${member}',
+        preventFullImport: true
       }
     }
   ]
@@ -35,13 +39,23 @@ export const buildExpectedOptions = (esModules, options) => [
         transform: esModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
         preventFullImport: true
       },
+      '@bleushan/utils': {
+        transform: esModules ? '@bleushan/utils/src/${member}' : '@bleushan/utils/lib/${member}',
+        preventFullImport: true
+      },
       ...options
     }
   ]
 ]
 
 export const buildExpectedOptionsWithOverrides = (esModules, options) => {
-  const {'lodash/fp': lfp = {}, lodash = {}, ramda = {}, ...rest} = options
+  const {
+    'lodash/fp': lfp = {},
+    lodash = {},
+    ramda = {},
+    '@bleushan/utils': bu = {},
+    ...rest
+  } = options
   return [
     [
       require('babel-plugin-transform-imports'),
@@ -64,6 +78,11 @@ export const buildExpectedOptionsWithOverrides = (esModules, options) => {
           transform: esModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
           preventFullImport: true,
           ...ramda
+        },
+        '@bleushan/utils': {
+          transform: esModules ? '@bleushan/utils/src/${member}' : '@bleushan/utils/lib/${member}',
+          preventFullImport: true,
+          ...bu
         },
         ...rest
       }

@@ -1,11 +1,7 @@
-import {invariant} from './utils/invariant.js'
-import {instanceOf} from './utils/instanceOf.js'
-import {isArrayLike} from './utils/isArrayLike.js'
-import {isString} from './utils/isString.js'
-import {isFunction} from './utils/isFunction.js'
-import {IndexIterator} from './iterators/IndexIterator.js'
-import {AsyncStreamIterator} from './iterators/AsyncStreamIterator.js'
-import {StreamIterator} from './iterators/StreamIterator.js'
+import {invariant, instanceOf, isArrayLike, isString, isFunction} from '@bleushan/utils'
+import IndexIterator from './iterators/IndexIterator.js'
+import AsyncStreamIterator from './iterators/AsyncStreamIterator.js'
+import StreamIterator from './iterators/StreamIterator.js'
 
 function iteratorFor(source, onComplete) {
   invariant({
@@ -25,7 +21,7 @@ function iteratorFor(source, onComplete) {
   return new IndexIterator(source, onComplete)
 }
 
-export class Stream {
+export default class Stream {
   #completed
   #iterator
 

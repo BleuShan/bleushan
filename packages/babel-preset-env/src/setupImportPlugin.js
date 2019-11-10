@@ -13,6 +13,10 @@ const defaultOptions = (esModules) => ({
   ramda: {
     transform: esModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
     preventFullImport: true
+  },
+  '@bleushan/utils': {
+    transform: esModules ? '@bleushan/utils/src/${member}' : '@bleushan/utils/lib/${member}',
+    preventFullImport: true
   }
 })
 

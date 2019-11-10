@@ -1,4 +1,4 @@
-import {of} from './of.js'
+import of from './of.js'
 
 export function memo(source) {
   const stream = of(source)

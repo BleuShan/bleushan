@@ -1,7 +1,6 @@
-import {isFunction} from '../utils/isFunction.js'
-import {invariant} from '../utils/invariant.js'
+import {isFunction, invariant} from '@bleushan/utils'
 
-export class AsyncStreamIterator {
+export default class AsyncStreamIterator {
   #source
   #onComplete
   constructor(source, onComplete) {

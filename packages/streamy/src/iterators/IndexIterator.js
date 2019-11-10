@@ -1,7 +1,6 @@
-import {invariant} from '../utils/invariant.js'
-import {isValidArrayLike} from '../utils/isValidArrayLike.js'
+import {invariant, isValidArrayLike} from '@bleushan/utils'
 
-export class IndexIterator {
+export default class IndexIterator {
   #index = 0
   #source
   #onComplete

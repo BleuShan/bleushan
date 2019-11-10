@@ -1,5 +1,5 @@
 import {EchoIterable, AsyncIterable} from '../__fixtures__/memo.js'
-import {memo} from '../memo.js'
+import memo from '../memo.js'
 
 describe.skip('memo', () => {
   let stream

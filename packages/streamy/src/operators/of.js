@@ -1,7 +1,7 @@
-import {Stream} from '../Stream.js'
-import {instanceOf} from '../utils/instanceOf.js'
+import Stream from '../Stream.js'
+import {instanceOf} from '@bleushan/utils'
 
-export function of(...sources) {
+export default function of(...sources) {
   if (sources.length === 1) {
     const [source] = sources
 

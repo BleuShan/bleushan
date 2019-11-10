@@ -1,16 +1,13 @@
-import invariant from './utils/invariant.js'
-import isPlainObject from './utils/isPlainObject.js'
-import getTag from './utils/getTag.js'
-import getType from './utils/getType.js'
+import {typeTag, typeOf, isPlainObject, invariant} from '@bleushan/utils'
 import splitPath from './splitPath.js'
 import {PARAM_KEY_REGEXP} from './constants.js'
 
 const getIncompatibleRouteConfigMessage = (value) =>
-  `Provided route config is incompatible. Expected ${getTag({})} ${getTag(value)}`
+  `Provided route config is incompatible. Expected ${typeTag({})} ${typeTag(value)}`
 
 function deserializeParamValue(value, deserializerKey) {
   const number = Number.parseFloat(value)
-  return Number.isNaN(number) || getType(value) === deserializerKey ? value : number
+  return Number.isNaN(number) || typeOf(value) === deserializerKey ? value : number
 }
 
 function extractParamKey(pathComponent) {
@@ -54,8 +51,10 @@ function getResult(path, candidateRoute) {
 }
 
 export default function match(path, routes) {
-  const isRoutesObject = isPlainObject(routes)
-  invariant(!isRoutesObject, getIncompatibleRouteConfigMessage(routes), 'match')
+  invariant({
+    condition: isPlainObject(routes),
+    message: getIncompatibleRouteConfigMessage(routes)
+  })
   const entries = Object.entries(routes)
   const [routedPath, routedValue, args] = entries.reduce(
     (currentResult, candidateRoute) => {
@@ -67,6 +66,6 @@ export default function match(path, routes) {
 
   return {
     path: routedPath,
-    value: getType(routedValue) === 'function' ? routedValue(args) : routedValue
+    value: typeOf(routedValue) === 'function' ? routedValue(args) : routedValue
   }
 }

@@ -1,5 +1,5 @@
-import {map} from '../map.js'
-import {of} from '../of.js'
+import map from '../map.js'
+import of from '../of.js'
 
 describe.skip('map', () => {
   describe.each`

@@ -1,4 +1,4 @@
-export function map(fn, target) {
+export default function map(fn, target) {
   function curriedMap(obj) {
     return obj
   }

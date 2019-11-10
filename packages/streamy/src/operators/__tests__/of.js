@@ -1,12 +1,8 @@
+import {typeTag, isArrayLike, isString, isFunction, instanceOf} from '@bleushan/utils'
 import {asyncGenerator, AsyncIterable, generator} from '../__fixtures__/of.js'
 import {toArray, toArrayAsync} from '../__fixtures__/common.js'
-import {of} from '../of.js'
-import {Stream} from '../../Stream.js'
-import {typeTag} from '../../utils/typeTag.js'
-import {isArrayLike} from '../../utils/isArrayLike.js'
-import {isString} from '../../utils/isString.js'
-import {isFunction} from '../../utils/isFunction.js'
-import {instanceOf} from '../../utils/instanceOf'
+import of from '../of.js'
+import Stream from '../../Stream.js'
 
 describe('the "of" operator', () => {
   describe('when invoked with', () => {
