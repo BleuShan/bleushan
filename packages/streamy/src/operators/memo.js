@@ -1,6 +1,6 @@
 import of from './of.js'
 
-export function memo(source) {
+export default function memo(source) {
   const stream = of(source)
 
   return stream

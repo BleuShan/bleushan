@@ -5,24 +5,8 @@
       {
         "useBuiltIns": "usage",
         "corejs": 3,
-        "targets": {
-          "node": "current"
-        },
         "shippedProposals": true
       }
     ]
-  ],
-  "env": {
-    "production": {
-      "presets": [
-        [
-          "minify",
-          {
-            "keepFnName": true,
-            "keepClassName": true
-          }
-        ]
-      ]
-    }
-  }
+  ]
 }

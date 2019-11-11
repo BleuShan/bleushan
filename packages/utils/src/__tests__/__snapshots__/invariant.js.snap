@@ -1,8 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`invariant when invoked with a valid configuration with message: Counting: and errorType: [Function CustomErrorWithArgs] when the condition is evaluated via a getter and it evaluates to false should throw with the appropriate error 1`] = `"Counting:1,2,3"`;
+
+exports[`invariant when invoked with a valid configuration with message: Counting: and errorType: [Function CustomErrorWithArgs] when the condition is evaluated via a method and it evaluates to false should throw with the appropriate error 1`] = `"Counting:1,2,3"`;
+
+exports[`invariant when invoked with a valid configuration with message: default error and errorType: undefined when the condition is evaluated via a getter and it evaluates to false should throw with the appropriate error 1`] = `"default error"`;
+
+exports[`invariant when invoked with a valid configuration with message: default error and errorType: undefined when the condition is evaluated via a method and it evaluates to false should throw with the appropriate error 1`] = `"default error"`;
+
+exports[`invariant when invoked with a valid configuration with message: some message and errorType: [Function CustomError] when the condition is evaluated via a getter and it evaluates to false should throw with the appropriate error 1`] = `"CustomError: some message"`;
+
+exports[`invariant when invoked with a valid configuration with message: some message and errorType: [Function CustomError] when the condition is evaluated via a method and it evaluates to false should throw with the appropriate error 1`] = `"CustomError: some message"`;
+
 exports[`invariant when invoked with an invalid configuration, like {
   message: 'string',
-  condition: [Function: condition] { [length]: 0, [name]: 'condition' }
+  condition: [Function: bound condition] { [length]: 0, [name]: 'bound condition' }
 }, should throw with the appropriate error 1`] = `"expected condition be able to be evaluated to a boolean, received: ste"`;
 
 exports[`invariant when invoked with an invalid configuration, like { message: 'string', condition: '' }, should throw with the appropriate error 1`] = `"expected condition be able to be evaluated to a boolean, received: "`;

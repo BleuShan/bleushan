@@ -57,9 +57,6 @@ describe('setupImportPlugin', () => {
           testLib: {
             transform: 'testLib/lib/${member}',
             preventFullImport: true
-          },
-          '@bleushan/utils': {
-            preventFullImport: false
           }
         },
         buildExpectedOptionsWithOverrides

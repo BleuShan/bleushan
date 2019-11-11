@@ -2,9 +2,8 @@
   "name": "@bleushan/babel-preset-env",
   "version": "4.2.0",
   "description": "A slightly more complicated babel preset env",
-  "main": "lib/index.js",
-  "module": "src/index.js",
-  "jsnext:main": "src/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/BleuShan/bleushan.git"
@@ -14,7 +13,7 @@
   "scripts": {
     "build": "yarn clean && yarn compile",
     "clean": "rimraf lib",
-    "compile": "babel src -d lib --ignore '**/__tests__,**/__mocks__,**/__fixtures__'",
+    "compile": "rollup --config",
     "lint": "eslint --fix src",
     "test": "jest"
   },
@@ -28,15 +27,16 @@
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@babel/plugin-proposal-private-methods": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/plugin-syntax-bigint": "^7.4.4",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
     "@babel/preset-env": "^7.7.1",
+    "@babel/runtime-corejs3": "^7.7.2",
     "babel-plugin-transform-imports": "^2.0.0",
     "babel-preset-minify": "^0.5.1"
   },
   "peerDependencies": {
-    "core-js": "^3.3.4",
-    "regenerator-runtime": "^0.13.3"
+    "core-js": "^3.3.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -58,7 +58,15 @@
     "jest-extended": "^0.11.2",
     "prettier": "^1.18.2",
     "regenerator-runtime": "^0.13.3",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "rollup": "^1.26.4",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.2"
   },
   "jest": {
     "coveragePathIgnorePatterns": [

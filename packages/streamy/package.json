@@ -9,9 +9,8 @@
   "author": "Philippe Lafontaine <lafontaine.philippe@gmail.com>",
   "homepage": "https://github.com/BleuShan/bleushan#readme",
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "src/index.js",
-  "jsnext:main": "src/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BleuShan/bleushan.git"
@@ -22,7 +21,7 @@
   "scripts": {
     "build": "yarn clean && yarn compile",
     "clean": "rimraf lib",
-    "compile": "babel src -d lib --ignore '**/__tests__,**/__mocks__,**/__fixtures__'",
+    "compile": "rollup --config",
     "lint": "eslint --fix src",
     "test": "jest"
   },
@@ -47,7 +46,15 @@
     "jest-chain": "^1.1.2",
     "jest-extended": "^0.11.2",
     "prettier": "^1.18.2",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "rollup": "^1.26.4",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.2"
   },
   "jest": {
     "coveragePathIgnorePatterns": [

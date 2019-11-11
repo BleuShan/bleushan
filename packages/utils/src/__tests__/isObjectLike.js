@@ -10,7 +10,7 @@ describe('isObjectLike', () => {
     ${null}                        | ${false}
     ${() => {}}                    | ${false}
     ${'string'}                    | ${false}
-  `('when called $value', ({value, expected}) => {
+  `('when called on $value', ({value, expected}) => {
     it(`should return with ${expected}`, () => {
       expect(isObjectLike(value)).toEqual(expected)
     })

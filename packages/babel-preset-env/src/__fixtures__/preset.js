@@ -25,14 +25,23 @@ export function buildExpectedConfiguration(
           require('@babel/plugin-proposal-private-methods')
         ]
   const plugins = [
-    ...decoratorsPlugins,
     require('@babel/plugin-syntax-bigint'),
+    require('@babel/plugin-syntax-import-meta'),
+    ...decoratorsPlugins,
     require('@babel/plugin-proposal-nullish-coalescing-operator'),
     require('@babel/plugin-proposal-optional-chaining'),
-    require('@babel/plugin-syntax-import-meta'),
     require('@babel/plugin-proposal-export-default-from'),
     require('@babel/plugin-proposal-export-namespace-from'),
-    ...importPlugins
+    ...importPlugins,
+    [
+      require('@babel/plugin-transform-runtime'),
+      {
+        corejs: {
+          version: 3,
+          proposals: true
+        }
+      }
+    ]
   ]
 
   const minifyPreset =

@@ -1,39 +1,11 @@
+import {
+  tagged,
+  writableTagged,
+  inheritedTag,
+  inheritedWritableTag
+} from '../__fixtures__/typeTag.js'
+
 import typeTag from '../typeTag.js'
-
-const tagged = Object.create(null, {
-  name: {
-    value: 'tagged',
-    enumerable: true
-  },
-  [Symbol.toStringTag]: {
-    value: 'StringTagged'
-  }
-})
-
-const inheritedTag = Object.create(tagged, {
-  name: {
-    value: 'inheritedTag',
-    enumerable: true
-  }
-})
-
-const writableTagged = Object.create(null, {
-  name: {
-    value: 'writableTagged',
-    enumerable: true
-  },
-  [Symbol.toStringTag]: {
-    value: 'StringTagged',
-    writable: true
-  }
-})
-
-const inheritedWritableTag = Object.create(writableTagged, {
-  name: {
-    value: 'inheritedWritableTag',
-    enumerable: true
-  }
-})
 
 describe.each([
   [null, 'Null'],

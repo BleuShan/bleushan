@@ -1,12 +1,10 @@
-  {
-    "presets": [
-      [
-        "@bleushan/babel-preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
+{
+  "presets": [
+    [
+      "@bleushan/babel-preset-env",
+      {
+        "minify": false
+      }
     ]
-  }
+  ]
+}

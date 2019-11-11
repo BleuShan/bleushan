@@ -1,7 +1,7 @@
 import isArrayLike from '../isArrayLike.js'
 
 describe('isArrayLike', () => {
-  it.each([
+  describe.each([
     [[1, 2, 3], true],
     [new Uint8Array(10), true],
     [new Uint8ClampedArray(10), true],
@@ -25,7 +25,9 @@ describe('isArrayLike', () => {
     [undefined, false],
     [NaN, false],
     [(a) => a, false]
-  ])('when called on %p should return %p', (value, expected) => {
-    expect(isArrayLike(value)).toEqual(expected)
+  ])('when called on %p', (value, expected) => {
+    it(`should return with ${expected}`, () => {
+      expect(isArrayLike(value)).toEqual(expected)
+    })
   })
 })

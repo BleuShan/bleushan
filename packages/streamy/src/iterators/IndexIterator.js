@@ -8,7 +8,7 @@ export default class IndexIterator {
   constructor(source, onComplete) {
     invariant({
       condition: isValidArrayLike(source),
-      message: 'expected source have a valid ArrayLike object',
+      message: 'expected source to be a valid ArrayLike object',
       errorType: TypeError
     })
     this.#source = source

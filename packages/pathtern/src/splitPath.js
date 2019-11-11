@@ -1,4 +1,5 @@
-import {isString} from '@bleushan/utils'
+import isString from '@bleushan/utils/lib/cjs/isString.js'
+
 import {SINGLE_PATH_COMPONENT_REGEXP, PATH_COMPONENT_MATCH_REGEXP} from './constants.js'
 
 export default function splitPath(path) {

@@ -3,9 +3,7 @@
     [
       "@bleushan/babel-preset-env",
       {
-        "targets": {
-          "node": "current"
-        }
+        "minify": false
       }
     ]
   ]

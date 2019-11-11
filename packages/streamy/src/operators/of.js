@@ -1,5 +1,5 @@
-import Stream from '../Stream.js'
 import {instanceOf} from '@bleushan/utils'
+import Stream from '../Stream.js'
 
 export default function of(...sources) {
   if (sources.length === 1) {
