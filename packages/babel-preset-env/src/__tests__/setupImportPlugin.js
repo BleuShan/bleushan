@@ -1,8 +1,7 @@
 /* eslint-disable no-template-curly-in-string */
 import {
   buildDefaultImportPluginSettings,
-  buildExpectedOptions,
-  buildExpectedOptionsWithOverrides
+  buildExpectedOptions
 } from '../__fixtures__/setupImportPlugin'
 import setupImportPlugin from '../setupImportPlugin'
 
@@ -59,7 +58,7 @@ describe('setupImportPlugin', () => {
             preventFullImport: true
           }
         },
-        buildExpectedOptionsWithOverrides
+        buildExpectedOptions
       ]
     ])('when called options: %o', (options, expectedOptionsFactory) => {
       it('should return the expected options', () => {

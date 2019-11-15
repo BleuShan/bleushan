@@ -3,6 +3,8 @@ import IndexIterator from './iterators/IndexIterator.js'
 import AsyncStreamIterator from './iterators/AsyncStreamIterator.js'
 import StreamIterator from './iterators/StreamIterator.js'
 
+const isAsyncStreamIterator = instanceOf(AsyncStreamIterator)
+
 function iteratorFor(source, onComplete) {
   invariant({
     condition: isArrayLike(source) || isString(source) || isFunction(source?.then),
@@ -34,7 +36,7 @@ export default class Stream {
   }
 
   get isAsync() {
-    return instanceOf(AsyncStreamIterator, this.#iterator)
+    return isAsyncStreamIterator(this.#iterator)
   }
 
   constructor(...sources) {

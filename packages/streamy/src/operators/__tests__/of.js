@@ -1,4 +1,4 @@
-import {typeTag, isArrayLike, isString, isFunction, instanceOf} from '@bleushan/utils/lib/cjs'
+import {typeTag, isArrayLike, isString, isFunction, instanceOf} from '@bleushan/utils'
 import {asyncGenerator, AsyncIterable, generator} from '../__fixtures__/of.js'
 import {toArray, toArrayAsync} from '../__fixtures__/common.js'
 import of from '../of.js'

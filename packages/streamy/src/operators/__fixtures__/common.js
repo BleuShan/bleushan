@@ -3,15 +3,18 @@ export function toArray(iterable) {
     return iterable
   }
 
-  if (iterable.length != null) {
-    return Array.from(iterable)
-  }
+  if (iterable != null) {
+    if (iterable.length) {
+      return Array.from(iterable)
+    }
 
-  const result = []
-  for (const value of iterable) {
-    result.push(value)
+    const result = []
+    for (const value of iterable) {
+      result.push(value)
+    }
+
+    return result
   }
-  return result
 }
 
 export async function toArrayAsync(iterable) {
@@ -19,13 +22,12 @@ export async function toArrayAsync(iterable) {
     return iterable
   }
 
-  if (iterable.length != null) {
-    return Array.from(iterable)
-  }
+  if (iterable != null) {
+    const result = []
+    for await (const value of iterable) {
+      result.push(value)
+    }
 
-  const result = []
-  for await (const value of iterable) {
-    result.push(value)
+    return result
   }
-  return result
 }

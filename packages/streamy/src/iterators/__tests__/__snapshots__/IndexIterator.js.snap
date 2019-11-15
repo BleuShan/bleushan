@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IndexIterator when called on a NaN should throw the appropriate error 1`] = `"(0 , _isValidArrayLike.default) is not a function"`;
+exports[`IndexIterator when called on a NaN should throw the appropriate error 1`] = `"expected source to be a valid ArrayLike object"`;
 
-exports[`IndexIterator when called on a null should throw the appropriate error 1`] = `"(0 , _isValidArrayLike.default) is not a function"`;
+exports[`IndexIterator when called on a null should throw the appropriate error 1`] = `"expected source to be a valid ArrayLike object"`;
 
-exports[`IndexIterator when called on a number should throw the appropriate error 1`] = `"(0 , _isValidArrayLike.default) is not a function"`;
+exports[`IndexIterator when called on a number should throw the appropriate error 1`] = `"expected source to be a valid ArrayLike object"`;
 
-exports[`IndexIterator when called on a undefined should throw the appropriate error 1`] = `"(0 , _isValidArrayLike.default) is not a function"`;
+exports[`IndexIterator when called on a undefined should throw the appropriate error 1`] = `"expected source to be a valid ArrayLike object"`;
 
-exports[`IndexIterator when called on an invalid arrayLike object should throw the appropriate error 1`] = `"(0 , _isValidArrayLike.default) is not a function"`;
+exports[`IndexIterator when called on an invalid arrayLike object should throw the appropriate error 1`] = `"expected source to be a valid ArrayLike object"`;
 
-exports[`IndexIterator when called on an object should throw the appropriate error 1`] = `"(0 , _isValidArrayLike.default) is not a function"`;
+exports[`IndexIterator when called on an object should throw the appropriate error 1`] = `"expected source to be a valid ArrayLike object"`;

@@ -1,32 +1,28 @@
 describe('isArray', () => {
-  afterEach(() => {
-    jest.resetModules()
-  })
-
   describe('when the builtin is unavailable', () => {
-    let original
-    beforeEach(() => {
-      original = Array.isArray
-      Array.isArray = undefined
+    beforeAll(() => {
+      jest.resetModules().mock('@babel/runtime-corejs3/core-js/array/is-array', () => undefined)
     })
 
-    afterEach(() => {
-      Array.isArray = original
+    afterAll(() => {
+      jest.resetModules().unmock('@babel/runtime-corejs3/core-js/array/is-array')
     })
 
     it.each`
-      value          | expected
-      ${true}        | ${false}
-      ${[]}          | ${true}
-      ${{length: 0}} | ${false}
-    `('should return $expected when called with $value', async ({value, expected}) => {
+      value
+      ${[]}
+      ${true}
+      ${null}
+      ${undefined}
+      ${{length: 0}}
+    `('should return $expected when called with $value', async ({value}) => {
       const {default: isArray} = await import('../isArray.js')
-      expect(isArray(value)).toEqual(expected)
+      expect(isArray(value)).toEqual(Array.isArray(value))
     })
 
     it('should not have use the original value it', async () => {
       const {default: isArray} = await import('../isArray.js')
-      expect(Object.is(isArray, original)).toBeFalse()
+      expect(Object.is(isArray, Array.isArray)).toBeFalse()
     })
   })
 
