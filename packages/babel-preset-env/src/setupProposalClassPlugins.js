@@ -16,8 +16,8 @@ const configureDecoratorsPlugin = (mode, decoratorsBeforeExport) => [
   ]
 ]
 const setupProposalClassPlugins = ({decorators = true, decoratorsBeforeExport = true} = {}) => {
-  return decorators
-    ? configureDecoratorsPlugin(decorators, decoratorsBeforeExport).concat(
+  return decorators !== false
+    ? configureDecoratorsPlugin(decorators, decoratorsBeforeExport !== false).concat(
         configureClassProperties(decorators === 'legacy')
       )
     : configureClassProperties()

@@ -1,25 +1,21 @@
 import setupImportPlugin from './setupImportPlugin'
 import setupProposalClassPlugins from './setupProposalClassPlugins'
 import {declare} from '@babel/helper-plugin-utils'
-import {isPlainObject} from './utils'
+import {isPlainObject, assignNonNil} from './utils'
+import {MINIFY_DEFAULTS, COREJS_DEFAULTS} from './constants'
 
-const MINIFY_DEFAULTS = {
-  keepFnName: true,
-  keepClassName: true
+function supportsStaticESM(caller) {
+  return Boolean(caller?.supportsStaticESM)
 }
 
 export default declare((api, options) => {
-  const {
-    import: importOptions,
-    minify,
-    decorators,
-    decoratorsBeforeExport,
-    ...presetOptions
-  } = options
-  const {modules, targets} = presetOptions
-  const esModuleTarget = targets ? !!targets.esmodules : false
-  const esModules = modules === false || esModuleTarget
-  const importPlugins = setupImportPlugin(importOptions, esModules)
+  api.assertVersion(7)
+  const {import: importOptions, minify, decorators, decoratorsBeforeExport, ...rest} = options
+  const {modules = 'auto', targets, corejs = COREJS_DEFAULTS, ...presetENVOptions} = rest
+  const targetsESModules = Boolean(targets?.esmodules)
+  const useESModules =
+    modules === false || targetsESModules || (modules === 'auto' && api.caller(supportsStaticESM))
+  const importPlugins = setupImportPlugin(importOptions, useESModules)
   const decoratorsOptions =
     decorators != null || decoratorsBeforeExport != null
       ? {decorators, decoratorsBeforeExport}
@@ -37,10 +33,8 @@ export default declare((api, options) => {
     [
       require('@babel/plugin-transform-runtime'),
       {
-        corejs: {
-          version: 3,
-          proposals: true
-        }
+        corejs,
+        useESModules
       }
     ]
   ]
@@ -49,24 +43,14 @@ export default declare((api, options) => {
     ? minify
     : MINIFY_DEFAULTS
 
-  const minifyEnvSettings = isPlainObject(minifyEnv)
-    ? isPlainObject(minifyEnv[api.env()])
-      ? minifyEnv[api.env()]
-      : minifyEnv[api.env()] === false
-      ? false
-      : Object.keys(minifyRoot).length || useDefaults
-      ? minifyRoot
-      : false
-    : {}
+  const minifyEnvSettings = isPlainObject(minifyEnv) ? minifyEnv[api.env()] : undefined
 
   const minifySettings =
     isTest || minify === false || minifyEnvSettings === false
       ? false
-      : {
-          ...MINIFY_DEFAULTS,
-          ...minifyRoot,
-          ...minifyEnvSettings
-        }
+      : useDefaults || minifyEnvSettings == null
+      ? assignNonNil(MINIFY_DEFAULTS, minifyRoot, minifyEnvSettings)
+      : assignNonNil(minifyRoot, minifyEnvSettings)
 
   const minifyPreset =
     minifySettings === false ? [] : [[require('babel-preset-minify'), minifySettings]]
@@ -76,14 +60,13 @@ export default declare((api, options) => {
     [
       require('@babel/preset-env'),
       {
+        modules,
+        targets,
         useBuiltIns: 'usage',
-        corejs: {
-          version: 3,
-          proposals: true
-        },
+        corejs,
         spec: true,
         shippedProposals: true,
-        ...presetOptions
+        ...presetENVOptions
       }
     ]
   ]

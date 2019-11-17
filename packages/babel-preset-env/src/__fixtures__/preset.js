@@ -1,12 +1,32 @@
-import {buildDefaultImportPluginSettings} from './setupImportPlugin'
-export function buildExpectedConfiguration(
-  env,
-  {import: _import, minify, decorators, ...presetOptions}
-) {
-  const {modules, targets} = presetOptions
-  const esModuleTarget = targets ? !!targets.esmodules : false
-  const esModules = modules === false || esModuleTarget
-  const importPlugins = buildDefaultImportPluginSettings(esModules)
+import {buildExpectedOptions as buildExpectedImportOptions} from './setupImportPlugin'
+import {MINIFY_DEFAULTS, COREJS_DEFAULTS} from '../constants'
+import {assignNonNil} from '../utils'
+
+function buildMinifyOption(minify, env) {
+  if (minify != null) {
+    const {env: envConfig, useDefaults, ...configRoot} = minify
+    if (envConfig) {
+      const match = envConfig[env] || false
+      if (useDefaults) {
+        return assignNonNil(MINIFY_DEFAULTS, configRoot, match)
+      }
+
+      return assignNonNil(configRoot, match)
+    }
+
+    return assignNonNil(MINIFY_DEFAULTS, configRoot)
+  }
+
+  return MINIFY_DEFAULTS
+}
+export function buildExpectedConfiguration({env, caller}, options) {
+  const {import: importOptions, minify, decorators, decoratorsBeforeExport, ...rest} = options
+  const {modules = 'auto', targets, corejs = COREJS_DEFAULTS, ...presetENVOptions} = rest
+  const targetsESModules = Boolean(targets && targets.esmodules)
+  const callerSupportsStaticESM = Boolean(caller && caller.supportsStaticESM)
+  const useESModules =
+    targetsESModules || modules === false || (modules === 'auto' && callerSupportsStaticESM)
+  const importPlugins = buildExpectedImportOptions(useESModules, importOptions)
   const decoratorsPlugins =
     decorators === 'legacy'
       ? [
@@ -20,7 +40,10 @@ export function buildExpectedConfiguration(
           require('@babel/plugin-proposal-private-methods')
         ]
       : [
-          [require('@babel/plugin-proposal-decorators'), {decoratorsBeforeExport: true}],
+          [
+            require('@babel/plugin-proposal-decorators'),
+            {decoratorsBeforeExport: decoratorsBeforeExport !== false}
+          ],
           require('@babel/plugin-proposal-class-properties'),
           require('@babel/plugin-proposal-private-methods')
         ]
@@ -36,10 +59,8 @@ export function buildExpectedConfiguration(
     [
       require('@babel/plugin-transform-runtime'),
       {
-        corejs: {
-          version: 3,
-          proposals: true
-        }
+        corejs,
+        useESModules
       }
     ]
   ]
@@ -47,30 +68,20 @@ export function buildExpectedConfiguration(
   const minifyPreset =
     env === 'test' || minify === false
       ? []
-      : [
-          [
-            require('babel-preset-minify'),
-            {
-              keepFnName: true,
-              keepClassName: true,
-              ...(minify != null ? minify : {})
-            }
-          ]
-        ]
+      : [[require('babel-preset-minify'), buildMinifyOption(minify, env)]]
 
   const presets = [
     ...minifyPreset,
     [
       require('@babel/preset-env'),
       {
+        modules,
+        targets,
         useBuiltIns: 'usage',
-        corejs: {
-          version: 3,
-          proposals: true
-        },
+        corejs,
         spec: true,
         shippedProposals: true,
-        ...presetOptions
+        ...presetENVOptions
       }
     ]
   ]

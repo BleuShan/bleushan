@@ -1,14 +1,4 @@
-let mockEnv
-
-export function useMockEnv(env) {
-  mockEnv = env
-}
-
-export function resetMock() {
-  mockEnv = undefined
-}
-
-function mockApiObject(api) {
+function copyApiObject(api) {
   let proto = null
   if (typeof api.version === 'string' && /^7\./.test(api.version)) {
     proto = Reflect.getPrototypeOf(api)
@@ -23,19 +13,12 @@ function mockApiObject(api) {
     }
   }
 
-  const mockProto = mockEnv
-    ? {
-        env() {
-          return mockEnv
-        }
-      }
-    : null
-  return Object.assign({}, proto, api, mockProto)
+  return Object.assign({}, proto, api)
 }
 
 export function declare(builder) {
   return (api, options, dirname) => {
-    api = mockApiObject(api)
+    api = copyApiObject(api)
     return builder(api, options || {}, dirname)
   }
 }

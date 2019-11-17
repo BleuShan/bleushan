@@ -58,7 +58,8 @@ to turn on legacy behavior:
     {
       "minify": {
         "keepFnName": true,
-        "keepClassName": true
+        "keepClassName": true,
+        "tdz": true
       }
     }
   ]

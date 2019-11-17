@@ -25,6 +25,38 @@ describe('setupProposalClassPlugins', () => {
       ]
     ],
     [
+      {decoratorsBeforeExport: true},
+      [
+        [require('@babel/plugin-proposal-decorators'), {decoratorsBeforeExport: true}],
+        require('@babel/plugin-proposal-class-properties'),
+        require('@babel/plugin-proposal-private-methods')
+      ]
+    ],
+    [
+      {decoratorsBeforeExport: null},
+      [
+        [require('@babel/plugin-proposal-decorators'), {decoratorsBeforeExport: true}],
+        require('@babel/plugin-proposal-class-properties'),
+        require('@babel/plugin-proposal-private-methods')
+      ]
+    ],
+    [
+      {decorators: null, decoratorsBeforeExport: true},
+      [
+        [require('@babel/plugin-proposal-decorators'), {decoratorsBeforeExport: true}],
+        require('@babel/plugin-proposal-class-properties'),
+        require('@babel/plugin-proposal-private-methods')
+      ]
+    ],
+    [
+      {decorators: null, decoratorsBeforeExport: null},
+      [
+        [require('@babel/plugin-proposal-decorators'), {decoratorsBeforeExport: true}],
+        require('@babel/plugin-proposal-class-properties'),
+        require('@babel/plugin-proposal-private-methods')
+      ]
+    ],
+    [
       undefined,
       [
         [require('@babel/plugin-proposal-decorators'), {decoratorsBeforeExport: true}],

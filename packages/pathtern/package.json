@@ -28,15 +28,14 @@
     "@bleushan/utils": "^1.0.0"
   },
   "devDependencies": {
-    "@bleushan/babel-eslint": "^10.0.4",
+    "@bleushan/babel-eslint": "^10.0.5",
     "@bleushan/babel-preset-env": "^5.0.0",
     "@bleushan/eslint-config": "^3.1.0",
-    "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.9.0",
     "eslint": "^6.6.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^22.20.0",
+    "eslint-plugin-jest": "^23.0.4",
     "eslint-plugin-node": "^9.2.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-promise": "^4.2.1",

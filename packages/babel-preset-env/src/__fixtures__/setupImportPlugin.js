@@ -1,6 +1,6 @@
 /* eslint-disable no-template-curly-in-string */
 
-export const buildExpectedOptions = (esModules, options = {}) => {
+export const buildExpectedOptions = (useESModules, options = {}) => {
   const {'lodash/fp': lfp = {}, lodash = {}, ramda = {}, '@bleushan/utils': blu, ...rest} = options
   return [
     [
@@ -21,7 +21,7 @@ export const buildExpectedOptions = (esModules, options = {}) => {
           ...lfp
         },
         ramda: {
-          transform: esModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
+          transform: useESModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
           preventFullImport: true,
           ...ramda
         },
@@ -31,4 +31,4 @@ export const buildExpectedOptions = (esModules, options = {}) => {
   ]
 }
 
-export const buildDefaultImportPluginSettings = (esModules) => buildExpectedOptions(esModules)
+export const buildDefaultImportPluginSettings = (useESModules) => buildExpectedOptions(useESModules)
