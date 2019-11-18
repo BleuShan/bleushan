@@ -1,8 +1,6 @@
 import autoExternal from 'rollup-plugin-auto-external'
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
-import builtins from 'rollup-plugin-node-builtins'
-import globals from 'rollup-plugin-node-globals'
 import resolve from 'rollup-plugin-node-resolve'
 import {terser} from 'rollup-plugin-terser'
 import {dirname, basename} from 'path'
@@ -23,8 +21,6 @@ function configure(entrypoint) {
       return !/^\.{1,2}\//.test(id)
     },
     plugins: [
-      globals(),
-      builtins(),
       autoExternal(),
       babel({
         exclude: 'node_modules/**',
