@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@5.0.0...@bleushan/babel-preset-env@6.0.0) (2019-11-18)
+
+
+### Features
+
+* **babel-preset-env:** overhaul import configuration ([aaeb637](https://github.com/BleuShan/bleushan/commit/aaeb63794023e7b6e7adf81fee13db6c92189d81))
+
+
+### BREAKING CHANGES
+
+* **babel-preset-env:** * `import` field is now `imports`.
+* `transform-runtime` is now turn off by default and can be configured via the `runtime` field
+* the entry point is now `preset.js` instead of `index.js`
+
+
+
+
+
 # [5.0.0](https://github.com/BleuShan/bleushan/compare/@bleushan/babel-preset-env@4.2.0...@bleushan/babel-preset-env@5.0.0) (2019-11-15)
 
 

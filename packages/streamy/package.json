@@ -1,6 +1,6 @@
 {
   "name": "@bleushan/streamy",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Iterator utilities",
   "keywords": [
     "Iterator",
@@ -26,12 +26,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "@bleushan/utils": "^1.0.0"
+    "@bleushan/utils": "^2.0.0"
   },
   "devDependencies": {
     "@bleushan/babel-eslint": "^10.0.5",
-    "@bleushan/babel-preset-env": "^5.0.0",
-    "@bleushan/eslint-config": "^3.1.0",
+    "@bleushan/babel-preset-env": "^6.0.0",
+    "@bleushan/eslint-config": "^3.1.1",
     "babel-jest": "^24.9.0",
     "eslint": "^6.6.0",
     "eslint-plugin-babel": "^5.3.0",
