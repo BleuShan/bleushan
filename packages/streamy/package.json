@@ -60,9 +60,6 @@
       "/node_modules/",
       "/__fixtures__/"
     ],
-    "transform": {
-      "^.+\\.jsx?$": "../../scripts/jest/root-babel-jest.js"
-    },
     "setupFilesAfterEnv": [
       "jest-extended",
       "jest-chain"

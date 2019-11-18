@@ -1,34 +1,33 @@
 /* eslint-disable no-template-curly-in-string */
 
-export const buildExpectedOptions = (useESModules, options = {}) => {
-  const {'lodash/fp': lfp = {}, lodash = {}, ramda = {}, '@bleushan/utils': blu, ...rest} = options
+export const buildExpectedOptions = ({useESModules, mappings = {}}) => {
+  const {'lodash/fp': lfp = {}, lodash = {}, ramda = {}, '@bleushan/utils': blu, ...rest} = mappings
   return [
-    [
-      require('babel-plugin-transform-imports'),
-      {
-        lodash: {
-          ...{
-            transform: 'lodash/${member}',
-            preventFullImport: true
-          },
-          ...lodash
+    require('babel-plugin-transform-imports'),
+    {
+      lodash: {
+        ...{
+          transform: 'lodash/${member}',
+          preventFullImport: true
         },
-        'lodash/fp': {
-          ...{
-            transform: 'lodash/fp/${member}',
-            preventFullImport: true
-          },
-          ...lfp
+        ...lodash
+      },
+      'lodash/fp': {
+        ...{
+          transform: 'lodash/fp/${member}',
+          preventFullImport: true
         },
-        ramda: {
-          transform: useESModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
-          preventFullImport: true,
-          ...ramda
-        },
-        ...rest
-      }
-    ]
+        ...lfp
+      },
+      ramda: {
+        transform: useESModules ? 'ramda/es/${member}' : 'ramda/src/${member}',
+        preventFullImport: true,
+        ...ramda
+      },
+      ...rest
+    }
   ]
 }
 
-export const buildDefaultImportPluginSettings = (useESModules) => buildExpectedOptions(useESModules)
+export const buildDefaultImportPluginSettings = ({useESModules}) =>
+  buildExpectedOptions({useESModules})

@@ -39,13 +39,14 @@ const merge = (a, b) => {
   }, {})
 }
 
-const mergeWithDefaultOptions = (options, useESModules) => {
+const mergeWithDefaultOptions = ({mappings, useESModules}) => {
   const defaults = defaultOptions(useESModules)
-  return options == null ? defaults : merge(defaults, options)
+  return mappings == null ? defaults : merge(defaults, mappings)
 }
 
-const setupImportPlugin = (options, useESModules) => [
-  [require('babel-plugin-transform-imports'), mergeWithDefaultOptions(options, useESModules)]
+const setupImportPlugin = (options) => [
+  require('babel-plugin-transform-imports'),
+  mergeWithDefaultOptions(options)
 ]
 
 export default setupImportPlugin

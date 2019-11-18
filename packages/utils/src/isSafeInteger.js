@@ -1,7 +1,5 @@
-import typeOf from './typeOf.js'
-
 export default function isSafeInteger(value) {
-  switch (typeOf(value)) {
+  switch (typeof value) {
     case 'number':
       return Number.isSafeInteger(value)
     case 'bigint':

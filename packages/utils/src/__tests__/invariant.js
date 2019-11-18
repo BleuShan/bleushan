@@ -3,6 +3,7 @@ import invariantWhenInvokedWith from '../__fixtures__/invariant.js'
 describe('invariant', () => {
   describe('when invoked', () => {
     describe.each([
+      [undefined],
       [{message: 1}],
       [{message: 'string', condition: () => 'ste'}],
       [{message: 'string', condition: ''}],
@@ -34,7 +35,7 @@ describe('invariant', () => {
 
       describe.each`
         message            | errorType              | args
-        ${'default error'} | ${undefined}           | ${[]}
+        ${'default error'} | ${undefined}           | ${undefined}
         ${'some message'}  | ${CustomError}         | ${[]}
         ${'Counting:'}     | ${CustomErrorWithArgs} | ${[1, 2, 3]}
       `('with message: $message and errorType: $errorType', ({message, errorType, args}) => {

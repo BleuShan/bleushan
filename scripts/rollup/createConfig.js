@@ -7,6 +7,8 @@ import resolve from 'rollup-plugin-node-resolve'
 import {terser} from 'rollup-plugin-terser'
 import {dirname, basename} from 'path'
 
+const IS_PRESET_DIRECTORY = /babel-preset-env/.test(process.cwd())
+
 function configure(entrypoint) {
   const format = /cjs/.test(entrypoint) ? 'cjs' : 'esm'
   return {
@@ -26,7 +28,34 @@ function configure(entrypoint) {
       autoExternal(),
       babel({
         exclude: 'node_modules/**',
-        runtimeHelpers: true
+        runtimeHelpers: true,
+        overrides: IS_PRESET_DIRECTORY
+          ? [
+              {
+                plugins: [
+                  [
+                    '@babel/plugin-transform-runtime',
+                    {
+                      useESModules: format === 'esm'
+                    }
+                  ]
+                ]
+              }
+            ]
+          : [
+              {
+                presets: [
+                  [
+                    '@bleushan/babel-preset-env',
+                    {
+                      imports: {
+                        useESModules: format === 'esm'
+                      }
+                    }
+                  ]
+                ]
+              }
+            ]
       }),
       resolve(),
       commonjs(),

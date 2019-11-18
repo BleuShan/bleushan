@@ -37,13 +37,13 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^23.0.4",
     "eslint-plugin-node": "^9.2.0",
-    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "jest": "^24.9.0",
     "jest-chain": "^1.1.2",
     "jest-extended": "^0.11.2",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "rimraf": "^2.6.2",
     "rollup": "^1.26.4",
     "rollup-plugin-auto-external": "^2.0.0",
@@ -59,9 +59,6 @@
       "/node_modules/",
       "/__fixtures__/"
     ],
-    "transform": {
-      "^.+\\.jsx?$": "../../scripts/jest/root-babel-jest.js"
-    },
     "setupFilesAfterEnv": [
       "jest-extended",
       "jest-chain"

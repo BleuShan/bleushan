@@ -1,32 +1,47 @@
 import {buildExpectedOptions as buildExpectedImportOptions} from './setupImportPlugin'
 import {MINIFY_DEFAULTS, COREJS_DEFAULTS} from '../constants'
-import {assignNonNil} from '../utils'
+import {isPlainObject, omitNils} from '../utils'
+import {promises as fs} from 'fs'
+import {resolve, join} from 'path'
+import {transformFileAsync} from '@babel/core'
+
+export function createMockApi(options) {
+  const {env, caller} = options
+  return {
+    assertVersion: jest.fn(),
+    caller: jest.fn((callback) => callback(caller)),
+    env: jest.fn().mockReturnValue(env)
+  }
+}
 
 function buildMinifyOption(minify, env) {
   if (minify != null) {
     const {env: envConfig, useDefaults, ...configRoot} = minify
+    const overrides = envConfig?.[env]
     if (envConfig) {
-      const match = envConfig[env] || false
       if (useDefaults) {
-        return assignNonNil(MINIFY_DEFAULTS, configRoot, match)
+        return Object.assign(MINIFY_DEFAULTS, configRoot, overrides)
       }
 
-      return assignNonNil(configRoot, match)
+      return Object.assign(configRoot, overrides)
     }
 
-    return assignNonNil(MINIFY_DEFAULTS, configRoot)
+    return Object.assign(MINIFY_DEFAULTS, configRoot)
   }
 
   return MINIFY_DEFAULTS
 }
 export function buildExpectedConfiguration({env, caller}, options) {
-  const {import: importOptions, minify, decorators, decoratorsBeforeExport, ...rest} = options
+  const {imports, minify, decorators, decoratorsBeforeExport, runtime, ...rest} = omitNils(options)
   const {modules = 'auto', targets, corejs = COREJS_DEFAULTS, ...presetENVOptions} = rest
-  const targetsESModules = Boolean(targets && targets.esmodules)
-  const callerSupportsStaticESM = Boolean(caller && caller.supportsStaticESM)
+  const {useESModules: importsUsesESModules, mappings} = isPlainObject(imports) ? imports : {}
   const useESModules =
-    targetsESModules || modules === false || (modules === 'auto' && callerSupportsStaticESM)
-  const importPlugins = buildExpectedImportOptions(useESModules, importOptions)
+    importsUsesESModules != null
+      ? importsUsesESModules
+      : !!targets?.esmodules ||
+        modules === false ||
+        (modules === 'auto' && !!caller?.supportsStaticESM)
+
   const decoratorsPlugins =
     decorators === 'legacy'
       ? [
@@ -55,18 +70,22 @@ export function buildExpectedConfiguration({env, caller}, options) {
     require('@babel/plugin-proposal-optional-chaining'),
     require('@babel/plugin-proposal-export-default-from'),
     require('@babel/plugin-proposal-export-namespace-from'),
-    ...importPlugins,
-    [
+    buildExpectedImportOptions({useESModules, mappings})
+  ]
+
+  if (runtime) {
+    plugins.push([
       require('@babel/plugin-transform-runtime'),
       {
         corejs,
-        useESModules
+        useESModules,
+        ...(isPlainObject(runtime) ? runtime : {})
       }
-    ]
-  ]
+    ])
+  }
 
   const minifyPreset =
-    env === 'test' || minify === false
+    env === 'test' || minify === false || (minify?.env != null && minify?.env[env] === false)
       ? []
       : [[require('babel-preset-minify'), buildMinifyOption(minify, env)]]
 
@@ -89,4 +108,23 @@ export function buildExpectedConfiguration({env, caller}, options) {
     presets,
     plugins
   }
+}
+
+export async function resolveCompileTestCasesFilePaths() {
+  const dirname = resolve(__dirname, 'compile')
+  const filenames = await fs.readdir(dirname)
+
+  return filenames.map((filename) => join(dirname, filename))
+}
+
+export function transformFileWithPreset(filename, envName, configuration) {
+  const presets = configuration
+    ? [[require('../preset.js'), configuration]]
+    : [require('../preset')]
+  return transformFileAsync(filename, {
+    configFile: false,
+    babelrc: false,
+    envName,
+    presets
+  })
 }

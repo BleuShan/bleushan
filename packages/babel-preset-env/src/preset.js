@@ -1,8 +1,9 @@
 import setupImportPlugin from './setupImportPlugin'
 import setupProposalClassPlugins from './setupProposalClassPlugins'
+import setupMinifyPreset from './setupMinifyPreset'
 import {declare} from '@babel/helper-plugin-utils'
-import {isPlainObject, assignNonNil} from './utils'
-import {MINIFY_DEFAULTS, COREJS_DEFAULTS} from './constants'
+import {isPlainObject, omitNils} from './utils'
+import {COREJS_DEFAULTS} from './constants'
 
 function supportsStaticESM(caller) {
   return Boolean(caller?.supportsStaticESM)
@@ -10,17 +11,23 @@ function supportsStaticESM(caller) {
 
 export default declare((api, options) => {
   api.assertVersion(7)
-  const {import: importOptions, minify, decorators, decoratorsBeforeExport, ...rest} = options
+  const {imports, minify, decorators, decoratorsBeforeExport, runtime = false, ...rest} = omitNils(
+    options
+  )
   const {modules = 'auto', targets, corejs = COREJS_DEFAULTS, ...presetENVOptions} = rest
   const targetsESModules = Boolean(targets?.esmodules)
+  const {useESModules: importsUsesESModule, mappings} = isPlainObject(imports) ? imports : {}
   const useESModules =
-    modules === false || targetsESModules || (modules === 'auto' && api.caller(supportsStaticESM))
-  const importPlugins = setupImportPlugin(importOptions, useESModules)
+    importsUsesESModule != null
+      ? importsUsesESModule
+      : modules === false ||
+        targetsESModules ||
+        (modules === 'auto' && api.caller(supportsStaticESM))
   const decoratorsOptions =
     decorators != null || decoratorsBeforeExport != null
       ? {decorators, decoratorsBeforeExport}
       : false
-  const isTest = api.env() === 'test'
+
   const plugins = [
     require('@babel/plugin-syntax-bigint'),
     require('@babel/plugin-syntax-import-meta'),
@@ -29,34 +36,22 @@ export default declare((api, options) => {
     require('@babel/plugin-proposal-optional-chaining'),
     require('@babel/plugin-proposal-export-default-from'),
     require('@babel/plugin-proposal-export-namespace-from'),
-    ...importPlugins,
-    [
+    setupImportPlugin({mappings, useESModules})
+  ]
+
+  if (runtime) {
+    plugins.push([
       require('@babel/plugin-transform-runtime'),
       {
         corejs,
-        useESModules
+        useESModules,
+        ...(isPlainObject(runtime) ? runtime : {})
       }
-    ]
-  ]
-
-  const {env: minifyEnv, useDefaults, ...minifyRoot} = isPlainObject(minify)
-    ? minify
-    : MINIFY_DEFAULTS
-
-  const minifyEnvSettings = isPlainObject(minifyEnv) ? minifyEnv[api.env()] : undefined
-
-  const minifySettings =
-    isTest || minify === false || minifyEnvSettings === false
-      ? false
-      : useDefaults || minifyEnvSettings == null
-      ? assignNonNil(MINIFY_DEFAULTS, minifyRoot, minifyEnvSettings)
-      : assignNonNil(minifyRoot, minifyEnvSettings)
-
-  const minifyPreset =
-    minifySettings === false ? [] : [[require('babel-preset-minify'), minifySettings]]
+    ])
+  }
 
   const presets = [
-    ...minifyPreset,
+    ...setupMinifyPreset(minify, api.env()),
     [
       require('@babel/preset-env'),
       {

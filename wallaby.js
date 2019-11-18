@@ -1,13 +1,17 @@
 process.env.NODE_ENV = 'test'
 const babelPreprocessor = (file) =>
-  require('@babel/core').transform(file.content, {
-    sourceMap: true,
-    filename: file.path
-  })
+  !file.path.includes('compile')
+    ? require('@babel/core').transform(file.content, {
+        sourceMap: true,
+        filename: file.path
+      })
+    : file.content
 
 module.exports = (wallaby) => ({
   files: [
     {pattern: 'packages/**/__@(mocks|fixtures)__/**/*.js', instrument: false},
+    {pattern: 'packages/*/.babelrc', instrument: false},
+    {pattern: '**/*.config.js', instrument: false},
     'packages/**/src/**/*.js',
     '!packages/**/__tests__/*.js'
   ],

@@ -7,10 +7,10 @@ import setupImportPlugin from '../setupImportPlugin'
 
 describe('setupImportPlugin', () => {
   describe.each`
-    esmodule
+    useESModules
     ${true}
     ${false}
-  `('with esmodule set to $esmodule', ({esmodule}) => {
+  `('with useESModules set to $useESModules', ({useESModules}) => {
     describe.each([
       [undefined, buildDefaultImportPluginSettings],
       [
@@ -60,10 +60,10 @@ describe('setupImportPlugin', () => {
         },
         buildExpectedOptions
       ]
-    ])('when called options: %o', (options, expectedOptionsFactory) => {
+    ])('when called mappings: %o', (mappings, expectedOptionsFactory) => {
       it('should return the expected options', () => {
-        expect(setupImportPlugin(options, esmodule)).toEqual(
-          expectedOptionsFactory(esmodule, options)
+        expect(setupImportPlugin({mappings, useESModules})).toEqual(
+          expectedOptionsFactory({useESModules, mappings})
         )
       })
     })

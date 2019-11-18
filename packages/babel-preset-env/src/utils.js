@@ -3,15 +3,15 @@ export const isPlainObject = (object) =>
   typeof object === 'object' &&
   Object.prototype.toString.call(object) === '[object Object]'
 
-export function assignNonNil(...values) {
-  return values.reduce((result, current) => {
-    if (isPlainObject(current)) {
-      for (const [key, value] of Object.entries(current)) {
-        if (value == null) continue
-        result[key] = value
-      }
+export function omitNils(obj) {
+  if (isPlainObject(obj)) {
+    const result = {}
+    for (const [key, value] of Object.entries(obj)) {
+      if (value == null) continue
+      result[key] = omitNils(value)
     }
-
     return result
-  }, {})
+  }
+
+  return obj
 }

@@ -158,10 +158,12 @@ entry:
   "preset": [
     "@bleushan/babel-preset-env"
     {
-      "import": {
-        "react-bootstrap": {
-          "transform": "react-bootstrap/lib/${member}",
-          "preventFullImport": true
+      "imports": {
+        "mappings": {
+          "react-bootstrap": {
+            "transform": "react-bootstrap/lib/${member}",
+            "preventFullImport": true
+          }
         }
       }
     }
@@ -176,14 +178,16 @@ to add a bunch of entries:
   "preset": [
     "@bleushan/babel-preset-env"
     {
-      "import":  {
-        "react-bootstrap": {
-          "transform": "react-bootstrap/lib/${member}",
-          "preventFullImport": true
-        },
-        "my-library\/?(((\\w*)?\/?)*)": {
-          "transform": "my-library/${1}/${member}",
-          "preventFullImport": true
+      "imports":  {
+        "mappings": {
+          "react-bootstrap": {
+            "transform": "react-bootstrap/lib/${member}",
+            "preventFullImport": true
+          },
+          "my-library\/?(((\\w*)?\/?)*)": {
+            "transform": "my-library/${1}/${member}",
+            "preventFullImport": true
+          }
         }
       }
     }

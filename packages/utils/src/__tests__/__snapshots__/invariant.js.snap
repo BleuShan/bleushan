@@ -15,12 +15,14 @@ exports[`invariant when invoked with a valid configuration with message: some me
 exports[`invariant when invoked with an invalid configuration, like {
   message: 'string',
   condition: [Function: bound condition] { [length]: 0, [name]: 'bound condition' }
-}, should throw with the appropriate error 1`] = `"expected condition be able to be evaluated to a boolean, received: ste"`;
+}, should throw with the appropriate error 1`] = `"Expected options.condition be able to be evaluated to a boolean, received: ste"`;
 
-exports[`invariant when invoked with an invalid configuration, like { message: 'string', condition: '' }, should throw with the appropriate error 1`] = `"expected condition be able to be evaluated to a boolean, received: "`;
+exports[`invariant when invoked with an invalid configuration, like { message: 'string', condition: '' }, should throw with the appropriate error 1`] = `"Expected options.condition be able to be evaluated to a boolean, received: "`;
 
-exports[`invariant when invoked with an invalid configuration, like { message: 'string', condition: false, errorType: 'stes' }, should throw with the appropriate error 1`] = `"errorContructor is not a function"`;
+exports[`invariant when invoked with an invalid configuration, like { message: 'string', condition: false, errorType: 'stes' }, should throw with the appropriate error 1`] = `"options.errorType is not a function"`;
 
-exports[`invariant when invoked with an invalid configuration, like { message: 'string', condition: true, errorType: 'stes' }, should throw with the appropriate error 1`] = `"errorContructor is not a function"`;
+exports[`invariant when invoked with an invalid configuration, like { message: 'string', condition: true, errorType: 'stes' }, should throw with the appropriate error 1`] = `"options.errorType is not a function"`;
 
-exports[`invariant when invoked with an invalid configuration, like { message: 1 }, should throw with the appropriate error 1`] = `"expected message to be a string, received: 1"`;
+exports[`invariant when invoked with an invalid configuration, like { message: 1 }, should throw with the appropriate error 1`] = `"Expected options.message to be a string, received: 1"`;
+
+exports[`invariant when invoked with an invalid configuration, like undefined, should throw with the appropriate error 1`] = `"Expected options to be an object, received: undefined"`;

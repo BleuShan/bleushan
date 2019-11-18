@@ -98,7 +98,7 @@ describe('the "of" operator', () => {
         [undefined],
         [NaN],
         [1],
-        [BigInt(1)]
+        [1n]
       ])('invalid value, like %o,', (value) => {
         beforeAll(() => {
           source = value

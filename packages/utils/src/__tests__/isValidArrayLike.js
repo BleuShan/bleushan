@@ -10,7 +10,7 @@ describe('isValidArrayLike', () => {
     ${new BigUint64Array()}                     | ${true}
     ${{length: 0}}                              | ${true}
     ${{0: 1, length: 1}}                        | ${true}
-    ${{[BigInt(0)]: 1, length: BigInt(1)}}      | ${true}
+    ${{[0n]: 1, length: 1n}}                    | ${true}
     ${new Set([1])}                             | ${false}
     ${{0: 1, length: 0}}                        | ${false}
     ${{0: 1, length: 2}}                        | ${false}

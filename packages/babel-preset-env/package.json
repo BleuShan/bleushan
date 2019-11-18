@@ -2,8 +2,8 @@
   "name": "@bleushan/babel-preset-env",
   "version": "5.0.0",
   "description": "A slightly more complicated babel preset env",
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
+  "main": "lib/cjs/preset.js",
+  "module": "lib/esm/preset.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/BleuShan/bleushan.git"
@@ -69,9 +69,6 @@
       "/node_modules/",
       "/__fixtures__/"
     ],
-    "transform": {
-      "^.+\\.jsx?$": "../../scripts/jest/root-babel-jest.js"
-    },
     "setupFilesAfterEnv": [
       "jest-extended",
       "jest-chain"

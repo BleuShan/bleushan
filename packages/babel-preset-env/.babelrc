@@ -20,8 +20,7 @@
         "corejs": {
           "version": 3,
           "proposals": true
-        },
-        "useESModules": "auto"
+        }
       }
     ]
   ]
