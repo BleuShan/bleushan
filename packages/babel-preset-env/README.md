@@ -3,7 +3,7 @@
 ### About
 
 This is a sane-ish attempt at adding some bells and whistles to [`@babel/preset-env`][1].
-It integrates [`ant-design/babel-plugin-import`][2],
+It integrates [`babel-transform-imports`][2],
 [`babel-preset-minify`][3]
 and some commonjs module transforms as required by [`jest`][4]
 test environment.
