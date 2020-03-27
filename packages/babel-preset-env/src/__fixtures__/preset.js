@@ -66,8 +66,6 @@ export function buildExpectedConfiguration({env, caller}, options) {
     require('@babel/plugin-syntax-bigint'),
     require('@babel/plugin-syntax-import-meta'),
     ...decoratorsPlugins,
-    require('@babel/plugin-proposal-nullish-coalescing-operator'),
-    require('@babel/plugin-proposal-optional-chaining'),
     require('@babel/plugin-proposal-export-default-from'),
     require('@babel/plugin-proposal-export-namespace-from'),
     buildExpectedImportOptions({useESModules, mappings})
@@ -99,6 +97,7 @@ export function buildExpectedConfiguration({env, caller}, options) {
         useBuiltIns: 'usage',
         corejs,
         spec: true,
+        bugfixes: true,
         shippedProposals: true,
         ...presetENVOptions
       }
