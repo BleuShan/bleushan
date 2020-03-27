@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/BleuShan/bleushan/compare/@bleushan/pathtern@4.0.4...@bleushan/pathtern@4.1.0) (2020-03-27)
+
+
+### Features
+
+* support latest babel ([bd5c52a](https://github.com/BleuShan/bleushan/commit/bd5c52a822e2fe967bab23ff0688080b2dd0511a))
+
+
+
+
+
 ## [4.0.4](https://github.com/BleuShan/bleushan/compare/@bleushan/pathtern@4.0.3...@bleushan/pathtern@4.0.4) (2019-12-07)
 
 **Note:** Version bump only for package @bleushan/pathtern

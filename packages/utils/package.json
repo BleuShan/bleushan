@@ -1,6 +1,6 @@
 {
   "name": "@bleushan/utils",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "Common utility",
   "keywords": [
     "utility"
@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "@bleushan/babel-eslint": "^11.1.0-forked.0",
-    "@bleushan/babel-preset-env": "^6.0.4",
-    "@bleushan/eslint-config": "^3.1.1",
+    "@bleushan/babel-preset-env": "^6.1.0",
+    "@bleushan/eslint-config": "^3.2.0",
     "@rollup/plugin-commonjs": "^11.0.2",
     "@rollup/plugin-node-resolve": "^7.1.1",
     "babel-jest": "^25.2.3",

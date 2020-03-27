@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/BleuShan/bleushan/compare/@bleushan/eslint-config@3.1.1...@bleushan/eslint-config@3.2.0) (2020-03-27)
+
+
+### Features
+
+* support latest babel ([bd5c52a](https://github.com/BleuShan/bleushan/commit/bd5c52a822e2fe967bab23ff0688080b2dd0511a))
+
+
+
+
+
 ## [3.1.1](https://github.com/BleuShan/bleushan/compare/@bleushan/eslint-config@3.1.0...@bleushan/eslint-config@3.1.1) (2019-11-18)
 
 **Note:** Version bump only for package @bleushan/eslint-config
